@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useOption } from '..';
 
 type StickyProps = {
   rightOffset: number;
   rightOffsetFixed: number;
-  stickyElRef: React.RefObject<HTMLDivElement>;
-  focusRef: React.RefObject<HTMLDivElement>;
+  stickyElRef: React.RefObject<HTMLDivElement | null>;
+  focusRef: React.RefObject<HTMLDivElement | null>;
   shouldStickToTop: boolean;
   shouldStickToBottom: boolean;
 };
 const StickyWrapper: React.FC<{
   children: (s: StickyProps) => React.ReactNode;
 }> = ({ children }) => {
-  const ref = React.createRef<HTMLDivElement>();
+  const ref = useRef<HTMLDivElement | null>(null);
   const sidebarPosition = useOption('sidebarPosition');
 
-  const stickyElRef = React.createRef<HTMLDivElement>();
+  const stickyElRef = useRef<HTMLDivElement | null>(null);
   const [shouldStickToTop, setShouldStickToTop] = useState(false);
   const [shouldStickToBottom, setShouldStickToBottom] = useState(true);
 

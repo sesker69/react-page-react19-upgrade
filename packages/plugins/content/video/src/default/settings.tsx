@@ -2,7 +2,7 @@ import React from 'react';
 import type { VideoSettings } from '../types/settings';
 import { lazyLoad } from '@react-page/editor';
 
-const PlayArrow = lazyLoad(() => import('@mui/icons-material/PlayArrow'));
+const PlayArrow = lazyLoad(() => import('@mui/icons-material/PlayArrow').then(module => ({ default: module.default })));
 
 export const defaultTranslations = {
   pluginName: 'Video',

@@ -13,7 +13,7 @@ jest.mock('../../utils/createId', () => {
 
 describe('migrateValue', () => {
   it('migrates unversioned state to latest state (1)', () => {
-    const oldEditable: Value_v0 = {
+    const oldEditable = {
       id: 'editableId',
       cells: [
         {
@@ -39,7 +39,7 @@ describe('migrateValue', () => {
           ],
         },
       ],
-    };
+    } as unknown as Value_v0;
     const newEditable = migrateValue(oldEditable, {
       lang: 'en',
       cellPlugins: [],

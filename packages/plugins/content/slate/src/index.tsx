@@ -28,13 +28,13 @@ export {
 };
 
 const SlateEditor = lazyLoad(() => import('./components/SlateEditor'));
-const Subject = lazyLoad(() => import('@mui/icons-material/Subject'));
+const Subject = lazyLoad(() => import('@mui/icons-material/Subject').then(module => ({ default: module.default })));
 const Controls = lazyLoad(() => import('./components/Controls'));
 const SlateProvider = lazyLoad(() => import('./components/SlateProvider'));
 
 const migrations = [v002, v003, v004];
 type SlateDefinition<TPlugins extends SlatePluginCollection> = {
-  icon: JSX.Element;
+  icon: React.ReactElement;
   plugins: TPlugins;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   defaultPluginType: string;

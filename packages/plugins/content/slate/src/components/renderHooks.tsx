@@ -73,55 +73,60 @@ export const useRenderElement = (
           style,
         };
 
-        if (typeof Component === 'string' || Component instanceof String) {
+        if (typeof Component === 'string') {
           const nativePropsInData = pickNativeProps(data as Data);
           // simple component like "p"
-          return (
-            <Component {...attributes} {...baseProps} {...nativePropsInData} />
+          const ElementComponent = Component as keyof React.JSX.IntrinsicElements;
+          return React.createElement(
+            ElementComponent,
+            { ...attributes, ...baseProps, ...nativePropsInData }
           );
         }
 
-        Component.displayName = 'SlatePlugin(' + matchingPlugin.type + ')';
-        // usefull in certain cases
-        const additionalProps = {
-          childNodes,
-          getTextContents: () =>
-            getTextContents(childNodes, {
-              slatePlugins: plugins,
-            }),
-          ...injections,
-        };
-        const component = (
-          <Component
-            {...baseProps}
-            {...data}
-            // attributes have to be spread in manually because of ref problem
-            attributes={attributes}
-            {...additionalProps}
-          />
-        );
-        const isVoid =
-          (matchingPlugin.object === 'inline' ||
-            matchingPlugin.object === 'block') &&
-          matchingPlugin.isVoid;
-
-        // if block is void, we still need to render children due to some quirks of slate
-
-        if (isVoid && !injections.readOnly) {
-          const Element = matchingPlugin.object === 'inline' ? 'span' : 'div';
-          return (
-            <Element {...attributes} contentEditable={false}>
-              {children}
-              <VoidEditableElement
-                component={component}
-                element={element}
-                plugin={matchingPlugin as SlatePluginDefinition}
-              />
-            </Element>
+        if (typeof Component === 'function') {
+          const ComponentFunction = Component as React.ComponentType<any>;
+          ComponentFunction.displayName = 'SlatePlugin(' + matchingPlugin.type + ')';
+          // usefull in certain cases
+          const additionalProps = {
+            childNodes,
+            getTextContents: () =>
+              getTextContents(childNodes, {
+                slatePlugins: plugins,
+              }),
+            ...injections,
+          };
+          const component = (
+            <ComponentFunction
+              {...baseProps}
+              {...data}
+              // attributes have to be spread in manually because of ref problem
+              attributes={attributes}
+              {...additionalProps}
+            />
           );
-        }
+          const isVoid =
+            (matchingPlugin.object === 'inline' ||
+              matchingPlugin.object === 'block') &&
+            matchingPlugin.isVoid;
 
-        return component;
+          // if block is void, we still need to render children due to some quirks of slate
+
+          if (isVoid && !injections.readOnly) {
+            const Element = matchingPlugin.object === 'inline' ? 'span' : 'div';
+            return (
+              <Element {...attributes} contentEditable={false}>
+                {children}
+                <VoidEditableElement
+                  component={component}
+                  element={element}
+                  plugin={matchingPlugin as SlatePluginDefinition}
+                />
+              </Element>
+            );
+          }
+
+          return component;
+        }
       }
       return <p>unknown component {type}</p>;
     },
@@ -160,29 +165,30 @@ export const useRenderLeave = (
               const data = isObject(dataRaw) ? dataRaw : {};
 
               const style = getStyle ? getStyle(data) : undefined;
-              if (
-                typeof Component === 'string' ||
-                Component instanceof String
-              ) {
+              if (typeof Component === 'string') {
                 const nativePropsInData = pickNativeProps(data as Data);
+                const ElementComponent = Component as keyof React.JSX.IntrinsicElements;
                 return (
-                  <Component {...nativePropsInData} style={style}>
+                  <ElementComponent {...nativePropsInData} style={style}>
                     {el}
-                  </Component>
+                  </ElementComponent>
                 );
               }
-              return (
-                <Component
-                  childNodes={[{ text }]}
-                  getTextContents={() => [text]}
-                  useSelected={injections.useSelected}
-                  useFocused={injections.useFocused}
-                  style={style}
-                  {...data}
-                >
-                  {el}
-                </Component>
-              );
+              if (typeof Component === 'function') {
+                const ComponentFunction = Component as React.ComponentType<any>;
+                return (
+                  <ComponentFunction
+                    childNodes={[{ text }]}
+                    getTextContents={() => [text]}
+                    useSelected={injections.useSelected}
+                    useFocused={injections.useFocused}
+                    style={style}
+                    {...data}
+                  >
+                    {el}
+                  </ComponentFunction>
+                );
+              }
             }
             return el;
           }, children)}

@@ -222,8 +222,8 @@ export const useNodeChildrenIds = (nodeId: string) => {
 export const useNodeHasChildren = (nodeId: string) => {
   return useNodeProps(nodeId, (node) =>
     isRow(node)
-      ? node.cells?.length > 0 ?? false
-      : (node?.rows?.length ?? 0) > 0 ?? false
+      ? (node.cells?.length ?? 0) > 0
+      : (node?.rows?.length ?? 0) > 0
   );
 };
 /**
@@ -359,7 +359,7 @@ export const useDebouncedCellData = (nodeId: string) => {
   }>({});
   const currentPartialDataRef = useRef<{
     [lang: string]: Record<string, unknown>;
-  }>();
+  }>({});
   const currentLang = useLang();
 
   const currentData = useMemo(() => {
@@ -377,6 +377,9 @@ export const useDebouncedCellData = (nodeId: string) => {
 
   const updateCellDataImmediatly = useUpdateCellData(nodeId);
 
+  const cellDataRef = useRef(cellData);
+  cellDataRef.current = cellData;
+  
   const onChange = useCallback(
     (
       partialData: Record<string, unknown>,
@@ -393,7 +396,7 @@ export const useDebouncedCellData = (nodeId: string) => {
       currentPartialDataRef.current = {
         ...(currentPartialDataRef.current ?? {}),
         [lang]: {
-          ...(cellData ?? {}),
+          ...(cellDataRef.current ?? {}),
           ...(currentPartialDataRef.current?.[lang] ?? {}),
           ...(partialData ?? {}),
         },
@@ -412,7 +415,7 @@ export const useDebouncedCellData = (nodeId: string) => {
         delete updateHandles.current[lang];
       }, 200);
     },
-    [updateCellDataImmediatly, currentLang, cellData]
+    [updateCellDataImmediatly, currentLang]
   );
 
   return [currentData, onChange] as const;

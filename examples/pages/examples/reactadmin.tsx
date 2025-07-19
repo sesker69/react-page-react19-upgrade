@@ -7,7 +7,7 @@ import {
   CardContent,
   Typography,
 } from '@mui/material';
-import type { Record as RecordType } from 'ra-core';
+import type { RaRecord as RecordType } from 'ra-core';
 import type { CellPlugin } from '@react-page/editor';
 import slate, {
   DEFAULT_SLATE_PLUGIN_ID,
@@ -250,7 +250,7 @@ const PostList = (props: any) => {
 
 export const PostEdit = (props: any) => (
   <Edit title="Edit a Post" {...props}>
-    <SimpleForm label="summary">
+    <SimpleForm>
       <TextInput disabled source="id" />
       <TextInput source="title" />
       <RaReactPageInput
@@ -264,7 +264,7 @@ export const PostEdit = (props: any) => (
 
 export const PostCreate = (props: any) => (
   <Create title="Create a Post" {...props}>
-    <SimpleForm label="summary">
+    <SimpleForm>
       <TextInput source="id" />
       <TextInput source="title" />
     </SimpleForm>
@@ -293,7 +293,7 @@ const ProductList = (props: any) => {
 
 export const ProductEdit = (props: any) => (
   <Edit title="Edit a Product" {...props}>
-    <SimpleForm label="summary">
+    <SimpleForm>
       <TextInput disabled source="id" />
       <TextInput source="title" />
       <TextInput multiline source="teaserText" />
@@ -304,7 +304,7 @@ export const ProductEdit = (props: any) => (
 
 export const ProductCreate = (props: any) => (
   <Create title="Create a Product" {...props}>
-    <SimpleForm label="summary">
+    <SimpleForm>
       <TextInput source="id" />
       <TextInput source="title" />
       <TextInput multiline source="teaserText" />

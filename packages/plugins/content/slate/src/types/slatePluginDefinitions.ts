@@ -1,5 +1,6 @@
 import type { DataTAny, DataTType, JsonSchema } from '@react-page/editor';
 import type { ReactNode } from 'react';
+import React from 'react';
 import type { Editor, Node } from 'slate';
 import type { Data } from '../types';
 import type { Translations } from './translations';
@@ -68,7 +69,7 @@ export type SlateBasePluginDefinition<T extends Data> = {
   /**
    * icon of this plugin in the toolbar
    */
-  icon?: JSX.Element;
+  icon?: React.ReactElement;
   /**
    * label / title of this plugin
    */
@@ -137,7 +138,7 @@ type MarkProps = {
 type NoInfer<T> = [T][T extends any ? 0 : never];
 
 type SlateComponentPluginComponent<T extends Data> =
-  | keyof JSX.IntrinsicElements
+  | keyof React.JSX.IntrinsicElements
   | React.ComponentType<
       NoInfer<
         {

@@ -84,7 +84,14 @@ function Select(props: SelectFieldProps) {
       'disableItem' as never,
       'id',
       'inputRef',
+      'slotProps',
+      'size',
     ]);
+    // Add size back only if it's not 'large' and component supports it
+    const componentSize = props.size && props.size !== 'large' ? props.size : undefined;
+    if (componentSize && (appearance === 'checkbox' || fieldType !== Array)) {
+      (filteredProps as any).size = componentSize;
+    }
 
     const children =
       fieldType !== Array ? (
@@ -186,7 +193,7 @@ function Select(props: SelectFieldProps) {
       disabled={disabled}
       error={!!error}
       fullWidth={fullWidth}
-      helperText={(error && showInlineError && errorMessage) || helperText}
+      helperText={((error && showInlineError && errorMessage) || helperText || '') as React.ReactNode}
       InputLabelProps={{
         shrink: !!label && (hasPlaceholder || hasValue),
         ...labelProps,

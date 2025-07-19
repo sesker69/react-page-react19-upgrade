@@ -12,7 +12,7 @@ const RenderOptionsProvider: FC<PropsWithChildren<RenderOptions>> = ({
   children,
   ...renderOptions
 }) => {
-  const lastRenderOptions = useRef<Required<RenderOptions>>();
+  const lastRenderOptions = useRef<Required<RenderOptions>>(null);
   const fullRenderOptions = {
     ...DEFAULT_RENDER_OPTIONS,
     ...renderOptions,

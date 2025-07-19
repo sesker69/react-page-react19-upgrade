@@ -8,7 +8,7 @@
     "target": "es5",
     "module": "commonjs",
     "allowJs": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "sourceMap": true,
@@ -22,6 +22,7 @@
     "types": [
       "node",
       "jest",
+      "@testing-library/jest-dom",
       "../packages/plugins/content/slate/src/slateTypes"
     ],
     "paths": {

@@ -39,7 +39,7 @@ function PluginControls(
     selection: Range;
     isActive: boolean;
     data: DataTType;
-  }>();
+  } | undefined>(undefined);
 
   const isVoid =
     plugin.pluginType === 'component' &&

@@ -3,16 +3,16 @@ import React from 'react';
 import createDataPlugin from '../pluginFactories/createDataPlugin';
 
 const AlignLeftIcon = lazyLoad(
-  () => import('@mui/icons-material/FormatAlignLeft')
+  () => import('@mui/icons-material/FormatAlignLeft').then(module => ({ default: module.default }))
 );
 const AlignCenterIcon = lazyLoad(
-  () => import('@mui/icons-material/FormatAlignCenter')
+  () => import('@mui/icons-material/FormatAlignCenter').then(module => ({ default: module.default }))
 );
 const AlignRightIcon = lazyLoad(
-  () => import('@mui/icons-material/FormatAlignRight')
+  () => import('@mui/icons-material/FormatAlignRight').then(module => ({ default: module.default }))
 );
 const AlignJustifyIcon = lazyLoad(
-  () => import('@mui/icons-material/FormatAlignJustify')
+  () => import('@mui/icons-material/FormatAlignJustify').then(module => ({ default: module.default }))
 );
 
 const left = createDataPlugin<{ align: 'left' }>({

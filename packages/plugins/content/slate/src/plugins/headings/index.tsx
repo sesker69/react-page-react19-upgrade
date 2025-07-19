@@ -1,12 +1,12 @@
 import createHeadingsPlugin from '../../pluginFactories/createHeadingsPlugin';
 import { lazyLoad } from '@react-page/editor';
 import React from 'react';
-const H1Icon = lazyLoad(() => import('@mui/icons-material/LooksOne'));
-const H2Icon = lazyLoad(() => import('@mui/icons-material/LooksTwo'));
-const H3Icon = lazyLoad(() => import('@mui/icons-material/Looks3'));
-const H4Icon = lazyLoad(() => import('@mui/icons-material/Looks4'));
-const H5Icon = lazyLoad(() => import('@mui/icons-material/Looks5'));
-const H6Icon = lazyLoad(() => import('@mui/icons-material/Looks6'));
+const H1Icon = lazyLoad(() => import('@mui/icons-material/LooksOne').then(module => ({ default: module.default })));
+const H2Icon = lazyLoad(() => import('@mui/icons-material/LooksTwo').then(module => ({ default: module.default })));
+const H3Icon = lazyLoad(() => import('@mui/icons-material/Looks3').then(module => ({ default: module.default })));
+const H4Icon = lazyLoad(() => import('@mui/icons-material/Looks4').then(module => ({ default: module.default })));
+const H5Icon = lazyLoad(() => import('@mui/icons-material/Looks5').then(module => ({ default: module.default })));
+const H6Icon = lazyLoad(() => import('@mui/icons-material/Looks6').then(module => ({ default: module.default })));
 
 export default {
   h1: createHeadingsPlugin({

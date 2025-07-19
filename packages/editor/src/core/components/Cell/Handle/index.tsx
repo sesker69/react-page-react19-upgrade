@@ -31,7 +31,7 @@ const Handle: React.FC<{ nodeId: string }> = ({ nodeId }) => {
           'react-page-cell-handle-drag-enabled': dragEnabled,
           'react-page-cell-handle-is-dragging': isDragging,
         })}
-        ref={dragRef}
+        ref={dragRef as unknown as React.Ref<HTMLDivElement>}
         onClick={(e) => {
           const mode = e.metaKey || e.ctrlKey ? 'add' : 'replace';
           focus(false, mode);

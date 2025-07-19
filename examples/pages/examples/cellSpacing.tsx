@@ -14,7 +14,7 @@ import { cellSpacingDemo } from '../../sampleContents/cellSpacing';
 // Define which plugins we want to use.
 const cellPlugins = [slate(), image, customLayout];
 
-interface CellSpacingState {
+interface CellSpacingState extends Record<string, unknown> {
   value?: Value;
   readOnly?: boolean;
   outlineEditor?: boolean;

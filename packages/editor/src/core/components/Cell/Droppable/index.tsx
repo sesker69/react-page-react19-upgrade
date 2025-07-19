@@ -22,7 +22,7 @@ import {
 import { onDrop, onHover } from './helper/dnd';
 
 export const useCellDrop = (nodeId: string) => {
-  const ref = React.useRef<HTMLDivElement>();
+  const ref = React.useRef<HTMLDivElement>(null);
 
   const hoverTarget = useNodeAsHoverTarget(nodeId);
 

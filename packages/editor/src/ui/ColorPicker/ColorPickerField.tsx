@@ -18,6 +18,9 @@ const ColorPickerField = connectField<{
       onChange={(v) => {
         props.onChange(colorToString(v));
       }}
+      onChangeComplete={(v) => {
+        props.onChange(colorToString(v));
+      }}
     />
   );
 });

@@ -94,7 +94,10 @@ function ListItem({
       dense={dense}
       disableGutters={disableGutters}
       divider={divider}
-      ref={(node) => (disableSort ? null : drag(drop(node)))}
+      ref={(node) => {
+        if (disableSort) return;
+        drag(drop(node));
+      }}
       sx={{ gap: '0.5rem' }}
     >
       <ListSortField

@@ -1,8 +1,9 @@
+import React from 'react';
 import createSimpleHtmlBlockPlugin from './createSimpleHtmlBlockPlugin';
 
 type ListItemDef = {
   type: string;
-  tagName: keyof JSX.IntrinsicElements;
+  tagName: keyof React.JSX.IntrinsicElements;
 };
 
 export default function <T>(def: ListItemDef) {

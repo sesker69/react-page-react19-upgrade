@@ -25,7 +25,10 @@ function makeUniformsSchema<T extends DataTType>(
     type: 'object',
     ...jsonSchema,
   };
-  const bridge = new JSONSchemaBridge(fullSchema, createValidator(fullSchema));
+  const bridge = new JSONSchemaBridge({
+    schema: fullSchema,
+    validator: createValidator(fullSchema),
+  });
 
   // see https://github.com/react-page/react-page/issues/1187
   // we remap props.component to props._customComponent to avoid the underlying issue in uniforms
@@ -41,6 +44,18 @@ function makeUniformsSchema<T extends DataTType>(
     }
     return props;
   };
+  
+  // Add getInitialModel method for uniforms v4 compatibility
+  (bridge as any).getInitialModel = function() {
+    return this.getSubfields().reduce(
+      (acc: any, fieldName: string) => ({
+        ...acc,
+        [fieldName]: this.getInitialValue(fieldName),
+      }),
+      {}
+    );
+  };
+  
   return bridge;
 }
 

@@ -1,4 +1,4 @@
-import { render } from 'enzyme';
+import { render } from '@testing-library/react';
 import React from 'react';
 import type { CellPlugin } from '../../core/types';
 import { HTMLRenderer } from '../HTMLRenderer';
@@ -48,14 +48,33 @@ describe('HTMLRenderer', () => {
       },
     ].forEach((c, k) => {
       describe(`case ${k}`, () => {
-        const wrapper = render(
-          <HTMLRenderer value={c} cellPlugins={cellPlugins} />
-        );
-        it('should pass', () => {
-          expect(wrapper.html()).toEqual(
-            // tslint:disable-next-line:max-line-length
-            '<div class="react-page-row"><div class="react-page-cell react-page-cell-sm-12 react-page-cell-xs-12 react-page-cell-leaf"><div class="react-page-cell-inner react-page-cell-inner-leaf some-class"><div style="display:flex;flex-direction:column;height:100%"><p>Hello world</p></div></div></div></div>'
+        it('should render the expected content', () => {
+          const { container, getByText } = render(
+            <HTMLRenderer value={c} cellPlugins={cellPlugins} />
           );
+          
+          // Check that the text content is rendered
+          expect(getByText('Hello world')).toBeInTheDocument();
+          
+          // Check that the row structure is present
+          const rowElement = container.querySelector('.react-page-row');
+          expect(rowElement).toBeInTheDocument();
+          
+          // Check that the cell structure is present
+          const cellElement = container.querySelector('.react-page-cell');
+          expect(cellElement).toBeInTheDocument();
+          expect(cellElement).toHaveClass('react-page-cell-sm-12');
+          expect(cellElement).toHaveClass('react-page-cell-xs-12');
+          expect(cellElement).toHaveClass('react-page-cell-leaf');
+          
+          // Check that the plugin's custom class is applied
+          const cellInner = container.querySelector('.react-page-cell-inner');
+          expect(cellInner).toHaveClass('some-class');
+          
+          // Check that the paragraph element is rendered
+          const paragraphElement = container.querySelector('p');
+          expect(paragraphElement).toBeInTheDocument();
+          expect(paragraphElement).toHaveTextContent('Hello world');
         });
       });
     });

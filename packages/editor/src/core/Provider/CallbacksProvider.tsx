@@ -9,7 +9,7 @@ const CallbacksProvider: FC<PropsWithChildren<Callbacks>> = ({
   children,
   ...callbacks
 }) => {
-  const lastCallbacks = useRef<Callbacks>();
+  const lastCallbacks = useRef<Callbacks>(null);
 
   const isEqual = lastCallbacks.current
     ? deepEquals(lastCallbacks.current, callbacks)

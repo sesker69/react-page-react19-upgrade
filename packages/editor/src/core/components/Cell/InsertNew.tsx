@@ -50,7 +50,7 @@ const InsertNew: React.FC<InsertNewProps> = ({ parentCellId }) => {
   if (isPreviewMode) return null;
   return (
     <div
-      ref={dropRef}
+      ref={dropRef as unknown as React.Ref<HTMLDivElement>}
       className={
         'react-page-cell-insert-new' + (isOver && isAllowed ? ' hover' : '')
       }

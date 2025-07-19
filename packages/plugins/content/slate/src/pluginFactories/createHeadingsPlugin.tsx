@@ -1,3 +1,4 @@
+import React from 'react';
 import type { SlateComponentPluginDefinition } from '../types/slatePluginDefinitions';
 import type { HtmlBlockData } from './createSimpleHtmlBlockPlugin';
 import createSimpleHtmlBlockPlugin from './createSimpleHtmlBlockPlugin';
@@ -16,7 +17,7 @@ function createHeadingsPlugin<T = {}>(def: HeadingsDef<T>) {
     replaceWithDefaultOnRemove: true,
     icon: def.icon,
     label: `Heading ${def.level}`,
-    tagName: ('h' + def.level) as keyof JSX.IntrinsicElements,
+    tagName: ('h' + def.level) as keyof React.JSX.IntrinsicElements,
   });
 }
 

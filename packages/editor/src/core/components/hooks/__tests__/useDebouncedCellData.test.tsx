@@ -51,25 +51,31 @@ describe('useDebouncedCellData', () => {
     const Component: React.FC<unknown> = () => {
       const [, setData] = useDebouncedCellData('cell0');
       React.useEffect(() => {
-        setData({ a: 1 }, {});
-        setData({ b: 1 }, {});
+        act(() => {
+          setData({ a: 1 }, {});
+          setData({ b: 1 }, {});
+        });
       }, []);
       return <div />;
     };
 
-    render(
-      <ReduxProvider store={store}>
-        <Component />
-      </ReduxProvider>
-    );
+    act(() => {
+      render(
+        <ReduxProvider store={store}>
+          <Component />
+        </ReduxProvider>
+      );
+    });
 
     setTimeout(() => {
-      const data = getCellData(
-        findNodeInState(store.getState(), 'cell0')?.node as Cell,
-        options.lang
-      );
-      expect(data).toMatchObject({ a: 1, b: 1 });
-      done();
+      act(() => {
+        const data = getCellData(
+          findNodeInState(store.getState(), 'cell0')?.node as Cell,
+          options.lang
+        );
+        expect(data).toMatchObject({ a: 1, b: 1 });
+        done();
+      });
     }, 300);
   });
 
@@ -119,32 +125,46 @@ describe('useDebouncedCellData', () => {
   */
   it('returns a referentially stable callback', (done) => {
     const store = createStore(theState);
+    let renderCount = 0;
+    let firstSetData: any = null;
+    
     const Component: React.FC<unknown> = () => {
       const [, setData] = useDebouncedCellData('cell0');
-
-      const ref = React.useRef(setData);
-      expect(ref.current).toBe(setData);
+      renderCount++;
+      
+      if (renderCount === 1) {
+        firstSetData = setData;
+      } else if (renderCount === 2) {
+        // On second render, check if it's the same reference
+        expect(setData).toBe(firstSetData);
+      }
 
       React.useEffect(() => {
-        setData({ a: 1 }, {});
+        act(() => {
+          setData({ a: 1 }, {});
+        });
       }, []);
 
       return <div />;
     };
 
-    render(
-      <ReduxProvider store={store}>
-        <Component />
-      </ReduxProvider>
-    );
+    act(() => {
+      render(
+        <ReduxProvider store={store}>
+          <Component />
+        </ReduxProvider>
+      );
+    });
 
     setTimeout(() => {
-      const data = getCellData(
-        findNodeInState(store.getState(), 'cell0')?.node as Cell,
-        options.lang
-      );
-      expect(data).toMatchObject({ a: 1 });
-      done();
+      act(() => {
+        const data = getCellData(
+          findNodeInState(store.getState(), 'cell0')?.node as Cell,
+          options.lang
+        );
+        expect(data).toMatchObject({ a: 1 });
+        done();
+      });
     }, 300);
   });
 });

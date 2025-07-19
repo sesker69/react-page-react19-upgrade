@@ -1,3 +1,4 @@
+import React from 'react';
 import type { CSSProperties } from 'react';
 import { LI, LISTS_TYPE_PREFIX } from '../plugins/lists/constants';
 import type { SlatePlugin } from '../types/SlatePlugin';
@@ -8,16 +9,16 @@ import createSimpleHtmlBlockPlugin from './createSimpleHtmlBlockPlugin';
 
 type ListDef = {
   type: string;
-  icon?: JSX.Element;
+  icon?: React.ReactElement;
   label?: string;
   hotKey?: string;
-  tagName: keyof JSX.IntrinsicElements;
+  tagName: keyof React.JSX.IntrinsicElements;
   noButton?: boolean; // for Li, this is automatically
 
   getStyle?: () => CSSProperties;
   listItem?: {
     type: string;
-    tagName: keyof JSX.IntrinsicElements;
+    tagName: keyof React.JSX.IntrinsicElements;
   };
 };
 

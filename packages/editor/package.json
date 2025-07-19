@@ -21,12 +21,15 @@
     "clean": "rimraf \"lib\" && rimraf \"lib-es\" && rm -f *.tsbuildinfo"
   },
   "peerDependencies": {
-    "react": ">= 16.14",
-    "react-dom": ">= 16.14"
+    "react": ">= 19.0",
+    "react-dom": ">= 19.0"
   },
   "dependencies": {
-    "@mui/icons-material": "^5.8.0",
-    "@mui/material": "^5.8.1",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^6.5.0",
+    "@mui/material": "^6.5.0",
+    "@reduxjs/toolkit": "^2.8.2",
     "@welldone-software/why-did-you-render": "^7.0.1",
     "ajv": "^7.1.1",
     "classnames": "^2.3.1",
@@ -38,25 +41,23 @@
     "lodash.flatten": "^4.4.0",
     "lodash.throttle": "^4.1.1",
     "react-color": "^2.19.3",
-    "react-dnd": "^15.1.2",
-    "react-dnd-html5-backend": "^15.1.2",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-draggable": "4.4.5",
     "react-lazy-with-preload": "^2.2.1",
-    "react-portal": "^4.2.2",
-    "react-redux": "^7.2.3",
+    "react-redux": "^9.2.0",
     "react-use": "^17.4.0",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2",
     "redux-undo": "^1.0.1",
     "tslib": "^2.2.0",
-    "uniforms": "^2.6.0 || ^3.0.0",
-    "uniforms-bridge-json-schema": "^2.6.0 || ^3.0.0"
+    "uniforms": "^4.0.0",
+    "uniforms-bridge-json-schema": "^4.0.0"
   },
   "devDependencies": {
     "@types/invariant": "^2.2.35",
     "@types/lodash.throttle": "^4.1.6",
-    "@types/react-color": "^3.0.4",
-    "@types/react-portal": "^4.0.4"
+    "@types/react-color": "^3.0.13"
   },
   "publishConfig": {
     "access": "public"

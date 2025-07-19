@@ -1,8 +1,9 @@
+import React from 'react';
 import type { SlatePlugin } from '../types/SlatePlugin';
 
 type Definition = {
-  iconIncrease: JSX.Element;
-  iconDecrease: JSX.Element;
+  iconIncrease: React.ReactElement;
+  iconDecrease: React.ReactElement;
   listItemType: string;
   labelIncrease?: string;
   labelDecrease?: string;

@@ -12,7 +12,7 @@ const OptionsProvider: FC<PropsWithChildren<Options>> = ({
   children,
   ...options
 }) => {
-  const lastOptions = useRef<Required<Options>>();
+  const lastOptions = useRef<Required<Options>>(null);
   const fullOptions = {
     ...DEFAULT_OPTIONS,
     ...options,

@@ -50,7 +50,7 @@ const useBlurAll = ({
   defaultMode?: DisplayModes;
   disabled?: boolean;
 }) => {
-  const ref = React.useRef<HTMLDivElement>();
+  const ref = React.useRef<HTMLDivElement>(null);
   const blurAllCells = useBlurAllCells();
   const setMode = useSetMode();
   const isInsertMode = useIsInsertMode();

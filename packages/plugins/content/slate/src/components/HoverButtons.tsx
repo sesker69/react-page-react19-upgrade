@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Portal } from 'react-portal';
+import { createPortal } from 'react-dom';
 import { useSlate } from 'slate-react';
 import useTextIsSelected from '../hooks/useTextIsSelected';
 import type { SlateProps } from '../types/component';
@@ -37,31 +37,30 @@ const HoverButtons = ({
     }
   }, [editor, showHoverToolbar]);
 
-  return (
-    <Portal>
-      <div
-        className={
-          'react-page-plugins-content-slate-inline-toolbar ' +
-          (showHoverToolbar
-            ? ''
-            : 'react-page-plugins-content-slate-inline-toolbar--hidden')
-        }
-        style={{ padding: 0 }}
-        ref={toolbarRef}
-      >
-        {plugins &&
-          plugins.map((plugin, i: number) =>
-            plugin.addHoverButton ? (
-              <PluginButton
-                dark
-                translations={translations}
-                key={i}
-                plugin={plugin}
-              />
-            ) : null
-          )}
-      </div>
-    </Portal>
+  return createPortal(
+    <div
+      className={
+        'react-page-plugins-content-slate-inline-toolbar ' +
+        (showHoverToolbar
+          ? ''
+          : 'react-page-plugins-content-slate-inline-toolbar--hidden')
+      }
+      style={{ padding: 0 }}
+      ref={toolbarRef}
+    >
+      {plugins &&
+        plugins.map((plugin, i: number) =>
+          plugin.addHoverButton ? (
+            <PluginButton
+              dark
+              translations={translations}
+              key={i}
+              plugin={plugin}
+            />
+          ) : null
+        )}
+    </div>,
+    document.body
   );
 };
 
