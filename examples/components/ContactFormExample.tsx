@@ -14,7 +14,7 @@ const ContactFormExample: React.FC<{
     <form
       onSubmit={(e) => {
         const formData = new FormData(e.currentTarget);
-        const formProps = Object.fromEntries(formData);
+        const formProps = Object.fromEntries(formData.entries());
         alert(`would send contact form to ${recipientId}.\n
 ${Object.keys(formProps)
   .map((key) => `${key}: ${formProps[key]}`)

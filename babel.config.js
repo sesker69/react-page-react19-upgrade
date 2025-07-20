@@ -16,9 +16,5 @@ module.exports = {
     ],
     '@babel/preset-typescript',
   ],
-  plugins: [
-    '@babel/plugin-transform-modules-commonjs',
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-transform-private-methods',
-  ],
+  plugins: ['@babel/plugin-transform-modules-commonjs'],
 };

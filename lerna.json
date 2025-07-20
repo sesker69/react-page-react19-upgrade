@@ -1,6 +1,7 @@
 {
-  "lerna": "3.6.0",
-  "npmClient": "yarn",
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "version": "0.0.0",
+  "npmClient": "npm",
   "packages": [
     "packages/editor",
     "packages/plugins/content/*",
@@ -8,7 +9,23 @@
     "packages/react-admin",
     "examples"
   ],
-  "useWorkspaces": true,
-  "version": "0.0.0",
-  "verifyAccess": false
+  "command": {
+    "run": {
+      "npmClient": "npm"
+    },
+    "exec": {
+      "npmClient": "npm"
+    },
+    "publish": {
+      "conventionalCommits": true,
+      "message": "chore(release): publish",
+      "registry": "https://registry.npmjs.org/",
+      "npmClient": "npm"
+    },
+    "bootstrap": {
+      "ignore": "component-*",
+      "npmClient": "npm",
+      "npmClientArgs": ["--legacy-peer-deps"]
+    }
+  }
 }

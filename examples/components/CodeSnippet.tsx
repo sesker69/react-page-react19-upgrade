@@ -1,14 +1,16 @@
 // lazy load this file to keep initial bundle small
 
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus as style } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+
+const vs2015 = require('react-syntax-highlighter/dist/styles/vs2015')
+  .default as any;
 import React from 'react';
 
 const CodeSnippet: React.FC<{
   code: string;
   language: string;
 }> = ({ code, language }) => (
-  <SyntaxHighlighter wrapLongLines language={language} style={style}>
+  <SyntaxHighlighter wrapLongLines language={language} style={vs2015}>
     {code}
   </SyntaxHighlighter>
 );

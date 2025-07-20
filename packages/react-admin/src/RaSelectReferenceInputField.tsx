@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ChoicesProps } from 'react-admin';
 import { ReferenceInput, SelectInput } from 'react-admin';
 import { connectField } from 'uniforms';
@@ -7,7 +6,7 @@ import React from 'react';
 type InputProps = {
   allowEmpty?: boolean;
   className?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   filterToQuery?: (filter: string) => any;
   label?: string | boolean | null;
   perPage?: number;
@@ -51,7 +50,6 @@ const RaSelectReferenceInputField: React.FC<Omit<Props, 'children'>> =
             optionText={optionText || 'id'}
             emptyValue={null}
             optionValue={optionValue || 'id'}
-            options={{ value }}
           />
         </ReferenceInput>
       );

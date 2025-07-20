@@ -43,11 +43,11 @@ class Inner extends React.Component<
     const darkenFinal =
       this.props.darkenPreview !== undefined
         ? this.props.darkenPreview
-        : darken ?? 0;
+        : (darken ?? 0);
     const lightenFinal =
       this.props.lightenPreview !== undefined
         ? this.props.lightenPreview
-        : lighten ?? 0;
+        : (lighten ?? 0);
 
     const tabs = this.props.enabledModes
       ? [
@@ -138,7 +138,7 @@ class Inner extends React.Component<
               value={darkenFinal}
               onChange={(e, value) =>
                 this.props.handleChangeDarkenPreview(
-                  value instanceof Array ? value[0] : value
+                  Array.isArray(value) ? value[0] : value
                 )
               }
               onChangeCommitted={this.props.handleChangeDarken}
@@ -159,7 +159,7 @@ class Inner extends React.Component<
               value={lightenFinal}
               onChange={(e, value) =>
                 this.props.handleChangeLightenPreview(
-                  value instanceof Array ? value[0] : value
+                  Array.isArray(value) ? value[0] : value
                 )
               }
               onChangeCommitted={this.props.handleChangeLighten}
@@ -290,7 +290,6 @@ class Inner extends React.Component<
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleChangeMode = (e: React.ChangeEvent<any>, mode: number) => {
     this.setState({ mode });
   };

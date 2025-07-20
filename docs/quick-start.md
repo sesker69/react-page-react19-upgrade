@@ -18,7 +18,7 @@ $ npm i --save @react-page/plugins-slate
 
 ## Dependencies
 
-**IMPORTANT**: use react 17 at the moment, react 18 is not yet supported. Follow this milestone: https://github.com/react-page/react-page/milestone/14
+**IMPORTANT**: React Page now supports React 19. For best compatibility, use React 19.0 or later.
 
 React-page uses [MUI](https://mui.com/) for the Editor UI. It is lazy loaded and do not directly increase your bundle size.
 

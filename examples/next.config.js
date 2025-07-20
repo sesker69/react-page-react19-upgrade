@@ -27,11 +27,17 @@ module.exports = withBundleAnalyzer({
     styledComponents: true,
   },
   experimental: {
-    esmExternals: 'loose',
+    // Remove deprecated esmExternals
+    esmExternals: false,
   },
   // Only use static export for production builds
   ...(isBuild && { output: 'export' }),
-  transpilePackages: ['react-dnd', 'react-dnd-html5-backend', 'dnd-core'],
+  transpilePackages: [
+    'react-dnd',
+    'react-dnd-html5-backend',
+    'dnd-core',
+    'react-syntax-highlighter',
+  ],
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
@@ -39,17 +45,34 @@ module.exports = withBundleAnalyzer({
         fs: false,
       };
     }
-    
+
+    // Prefer ES modules for our packages
+    config.resolve.mainFields = ['module', 'main'];
+
+    // Handle ESM dependencies by marking them as external for server builds
+    // and allowing them to be bundled for client builds
+    if (isServer) {
+      config.externals = [
+        ...(config.externals || []),
+        'react-dnd',
+        'react-dnd-html5-backend',
+        'dnd-core',
+      ];
+    }
+
     // Add polyfill for findDOMNode
     const originalEntry = config.entry;
     config.entry = async () => {
       const entries = await originalEntry();
-      if (entries['main.js'] && !entries['main.js'].includes('./polyfills/react-dom-polyfill.js')) {
+      if (
+        entries['main.js'] &&
+        !entries['main.js'].includes('./polyfills/react-dom-polyfill.js')
+      ) {
         entries['main.js'].unshift('./polyfills/react-dom-polyfill.js');
       }
       return entries;
     };
-    
+
     return config;
   },
 });
