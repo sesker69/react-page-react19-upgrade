@@ -46,7 +46,6 @@ export function AutoformControls<T extends DataTType>(props: Props<T>) {
 
   return (
     <AutoForm
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       model={data as any}
       autosave={true}
       schema={bridge as any}

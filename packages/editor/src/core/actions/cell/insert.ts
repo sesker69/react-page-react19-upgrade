@@ -89,7 +89,7 @@ export const createCell = (
 
   const partialRows = partialCell.rows?.length
     ? partialCell.rows
-    : plugin?.createInitialChildren?.() ?? [];
+    : (plugin?.createInitialChildren?.() ?? []);
   const dataI18n = {
     [lang]:
       partialCell?.data ??
@@ -186,7 +186,7 @@ const insertFullCell =
       ts: new Date(),
       item: cell,
       hoverId:
-        level === 0 ? hoverId : ancestorIds[Math.max(level - 1)] ?? hoverId,
+        level === 0 ? hoverId : (ancestorIds[Math.max(level - 1)] ?? hoverId),
       level: l,
       // FIXME: item handling is a bit confusing,
       // we now give some of them a name like "cell" or "item",
@@ -195,7 +195,6 @@ const insertFullCell =
       notUndoable: insertOptions?.notUndoable,
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (dispatch: any) => {
       dispatch(insertAction);
 

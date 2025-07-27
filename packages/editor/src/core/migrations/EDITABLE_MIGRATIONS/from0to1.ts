@@ -11,14 +11,13 @@ type PluginOld = {
   name: string;
   version: number | string;
 };
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 type Content<StateT = any> = {
   plugin: PluginOld;
   state?: StateT;
   stateI18n?: I18nField<StateT>;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Layout<StateT = any> = {
   plugin: PluginOld;
   state?: StateT;
@@ -115,7 +114,7 @@ export default new Migration<Value_v0, Value>({
     // check if is the only one cell with only rows, then we cann omit that
     const rootRows =
       migratedCells.length === 1 && !migratedCells[0].plugin
-        ? migratedCells[0].rows ?? []
+        ? (migratedCells[0].rows ?? [])
         : [
             {
               id: createId(),

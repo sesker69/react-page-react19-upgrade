@@ -4,9 +4,6 @@
 
 see https://github.com/react-page/react-page/issues/1329
 
-
-
-
 ---
 
 [![Build Status](https://app.travis-ci.com/react-page/react-page.svg?branch=master)](https://app.travis-ci.com/react-page/react-page)

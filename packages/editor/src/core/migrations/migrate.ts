@@ -10,7 +10,6 @@ import { sanitizeVersion } from './Migration';
 
 export type MigrationVersion = number | string;
 export const migrate = <TOut>(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dataIn: any,
   migrations: Migration[] | undefined,
   versionIn: MigrationVersion = 0,
@@ -23,7 +22,7 @@ export const migrate = <TOut>(
   let currentDataVersion = sanitizeVersion(versionIn);
 
   //console.log('migrate', versionIn);
-  // eslint-disable-next-line no-constant-condition
+
   while (true) {
     const migrationToRun = migrations?.find(
       (m) =>
@@ -117,7 +116,6 @@ const migratePluginData = (editable: Value, context: MigrationContext) => {
 };
 
 export const migrateValue = (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dataIn: null | ({ version?: number } & ValueWithLegacy),
   context: MigrationContext
 ): Value | null => {

@@ -15,8 +15,8 @@ const reduceToIdAndSizeArray = (
 ) => {
   const nextNode = array[index + 1];
 
-  const size = isRow(node) ? 12 : node.size ?? 12;
-  const nextSize = !nextNode || isRow(nextNode) ? 0 : nextNode.size ?? 12;
+  const size = isRow(node) ? 12 : (node.size ?? 12);
+  const nextSize = !nextNode || isRow(nextNode) ? 0 : (nextNode.size ?? 12);
   const offset = size + (acc[index - 1]?.offset ?? 0);
   return [
     ...acc,
@@ -35,8 +35,8 @@ const Row: React.FC<{ nodeId: string }> = ({ nodeId }) => {
 
   const childrenWithOffsets = useNodeProps(nodeId, (node) =>
     isRow(node)
-      ? node.cells?.reduce(reduceToIdAndSizeArray, []) ?? []
-      : node?.rows?.reduce(reduceToIdAndSizeArray, []) ?? []
+      ? (node.cells?.reduce(reduceToIdAndSizeArray, []) ?? [])
+      : (node?.rows?.reduce(reduceToIdAndSizeArray, []) ?? [])
   );
 
   const rowHasInlineChildrenPosition = useNodeProps(
@@ -50,7 +50,6 @@ const Row: React.FC<{ nodeId: string }> = ({ nodeId }) => {
   return (
     <Droppable nodeId={nodeId}>
       <div
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ref={ref as any}
         className={classNames('react-page-row', {
           'react-page-row-has-floating-children': Boolean(

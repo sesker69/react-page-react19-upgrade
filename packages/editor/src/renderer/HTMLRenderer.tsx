@@ -54,7 +54,6 @@ const HTMLRow: React.FC<
   </div>
 ));
 
-// eslint-disable-next-line no-empty-function
 const noop = () => {
   return;
 };

@@ -14,7 +14,7 @@ import Draggable from '../Draggable/index';
 
 type ItemProps = {
   plugin: CellPlugin;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   insert: InsertNewCell;
   translations: PluginDrawerLabels;
 };

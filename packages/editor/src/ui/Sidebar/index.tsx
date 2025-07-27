@@ -60,7 +60,6 @@ export const Sidebar: React.FC<{
   const customOptions = useOption('customOptions');
 
   const actions = [
-    // eslint-disable-next-line react/jsx-key
     undoRedoEnabled
       ? { action: <UndoRedo labelRedo="redo" labelUndo="undo" /> }
       : null,
@@ -82,7 +81,8 @@ export const Sidebar: React.FC<{
     previewEnabled
       ? { action: <TogglePreview label={t(defaultLabels.preview) ?? ''} /> }
       : null,
-    ...(customOptions?.map((CustomOption) => ({ action: <CustomOption /> })) ?? []),
+    ...(customOptions?.map((CustomOption) => ({ action: <CustomOption /> })) ??
+      []),
   ].filter(notEmpty);
   return (
     <div

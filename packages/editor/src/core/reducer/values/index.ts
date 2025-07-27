@@ -20,7 +20,6 @@ import { value } from '../value';
 
 export const values = undoable(value, {
   filter: function filterState(action, currentState, previousHistory) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((action as any)?.notUndoable) {
       return false;
     }

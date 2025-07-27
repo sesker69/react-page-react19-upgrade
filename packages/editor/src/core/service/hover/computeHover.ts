@@ -246,7 +246,7 @@ export const computeHover = (
   if (deepEquals(all, last[matrixName])) {
     return;
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   last[matrixName] = all as any;
 
   return CALLBACK_LIST[cell](drag, hover, actions, {

@@ -17,7 +17,6 @@ const makeStore = (initialFocus: Focus) => {
     }),
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return createStore<RootState, any, any, any>(
     reducer,
     {

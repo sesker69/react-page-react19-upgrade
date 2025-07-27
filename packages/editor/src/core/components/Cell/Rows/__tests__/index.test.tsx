@@ -4,7 +4,7 @@ import Component from '../index';
 
 // Mock the hooks module to avoid Redux dependency
 jest.mock('../../../hooks', () => ({
-  useNodeChildrenIds: jest.fn(() => [])
+  useNodeChildrenIds: jest.fn(() => []),
 }));
 
 describe('components/Cell/Rows', () => {

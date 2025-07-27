@@ -76,16 +76,19 @@ export const useRenderElement = (
         if (typeof Component === 'string') {
           const nativePropsInData = pickNativeProps(data as Data);
           // simple component like "p"
-          const ElementComponent = Component as keyof React.JSX.IntrinsicElements;
-          return React.createElement(
-            ElementComponent,
-            { ...attributes, ...baseProps, ...nativePropsInData }
-          );
+          const ElementComponent =
+            Component as keyof React.JSX.IntrinsicElements;
+          return React.createElement(ElementComponent, {
+            ...attributes,
+            ...baseProps,
+            ...nativePropsInData,
+          });
         }
 
         if (typeof Component === 'function') {
           const ComponentFunction = Component as React.ComponentType<any>;
-          ComponentFunction.displayName = 'SlatePlugin(' + matchingPlugin.type + ')';
+          ComponentFunction.displayName =
+            'SlatePlugin(' + matchingPlugin.type + ')';
           // usefull in certain cases
           const additionalProps = {
             childNodes,
@@ -167,7 +170,8 @@ export const useRenderLeave = (
               const style = getStyle ? getStyle(data) : undefined;
               if (typeof Component === 'string') {
                 const nativePropsInData = pickNativeProps(data as Data);
-                const ElementComponent = Component as keyof React.JSX.IntrinsicElements;
+                const ElementComponent =
+                  Component as keyof React.JSX.IntrinsicElements;
                 return (
                   <ElementComponent {...nativePropsInData} style={style}>
                     {el}

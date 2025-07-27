@@ -1,7 +1,11 @@
 import React from 'react';
 import type { ImageSettings } from '../types/settings';
 import { lazyLoad } from '@react-page/editor';
-const Panorama = lazyLoad(() => import('@mui/icons-material/Panorama').then(module => ({ default: module.default })));
+const Panorama = lazyLoad(() =>
+  import('@mui/icons-material/Panorama').then((module) => ({
+    default: module.default,
+  }))
+);
 
 export const defaultTranslations = {
   pluginName: 'Image',

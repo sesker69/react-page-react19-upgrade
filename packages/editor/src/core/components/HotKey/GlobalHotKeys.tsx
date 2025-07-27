@@ -37,9 +37,9 @@ type PluginHandlerName =
   | 'handleFocusPreviousHotKey';
 
 let lastFocused: HTMLDivElement | null = null;
-const GlobalHotKeys: React.FC<{ focusRef: RefObject<HTMLDivElement | null> }> = ({
-  focusRef,
-}) => {
+const GlobalHotKeys: React.FC<{
+  focusRef: RefObject<HTMLDivElement | null>;
+}> = ({ focusRef }) => {
   const editor = useEditorStore();
 
   const undo = useUndo();
@@ -104,7 +104,6 @@ const GlobalHotKeys: React.FC<{ focusRef: RefObject<HTMLDivElement | null> }> = 
         const type = 'text/plain'; // json is not supported
         const blob = new Blob([JSON.stringify(cell)], { type });
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = [new ClipboardItem({ [type]: blob as any })];
 
         navigator.clipboard.write(data);

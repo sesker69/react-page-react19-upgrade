@@ -29,15 +29,17 @@ export default function SimpleExample() {
   <Editor cellPlugins={cellPlugins} value={value} readOnly />;
 
   // ....
-};
+}
 ```
 
 ### Editing
+
 [Link to editing example](examples/pages/examples/simple.tsx)
 
 [Live demo of the editing example](//demo/examples/simple)
 
 ### Viewing
+
 [Link to viewing example](examples/pages/examples/readonly.tsx)
 
 [Live demo of the viewing example](//demo/examples/readonly)
@@ -117,7 +119,7 @@ cellSpacing = {
 
 ### `uiTranslator`
 
-Takes a function `(label:string) => string`.  
+Takes a function `(label:string) => string`.
 
 This prop enables i18n support. All interface labels are wrapped with this function.
 
@@ -132,12 +134,12 @@ const TRANSLATIONS: { [key: string]: string } = {
   'Preview blocks': '预览模式',
 };
 
- const uiTranslator = useCallback((label?: string) => {
-    if (TRANSLATIONS[label] !== undefined) {
-      return TRANSLATIONS[label];
-    }
-    return `${label}(to translate)`;
-  }, []);
+const uiTranslator = useCallback((label?: string) => {
+  if (TRANSLATIONS[label] !== undefined) {
+    return TRANSLATIONS[label];
+  }
+  return `${label}(to translate)`;
+}, []);
 ```
 
 ### `childConstraints` (experimental)

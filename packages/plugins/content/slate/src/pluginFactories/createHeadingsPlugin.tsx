@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 import type { SlateComponentPluginDefinition } from '../types/slatePluginDefinitions';
 import type { HtmlBlockData } from './createSimpleHtmlBlockPlugin';
 import createSimpleHtmlBlockPlugin from './createSimpleHtmlBlockPlugin';
@@ -9,7 +9,6 @@ export type HeadingsDef<T> = {
   SlateComponentPluginDefinition<HtmlBlockData<T>>,
   'type' | 'getInitialData' | 'icon'
 >;
-// eslint-disable-next-line @typescript-eslint/ban-types
 function createHeadingsPlugin<T = {}>(def: HeadingsDef<T>) {
   return createSimpleHtmlBlockPlugin<T>({
     type: def.type,

@@ -28,7 +28,11 @@ export {
 };
 
 const SlateEditor = lazyLoad(() => import('./components/SlateEditor'));
-const Subject = lazyLoad(() => import('@mui/icons-material/Subject').then(module => ({ default: module.default })));
+const Subject = lazyLoad(() =>
+  import('@mui/icons-material/Subject').then((module) => ({
+    default: module.default,
+  }))
+);
 const Controls = lazyLoad(() => import('./components/Controls'));
 const SlateProvider = lazyLoad(() => import('./components/SlateProvider'));
 
@@ -36,7 +40,7 @@ const migrations = [v002, v003, v004];
 type SlateDefinition<TPlugins extends SlatePluginCollection> = {
   icon: React.ReactElement;
   plugins: TPlugins;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   defaultPluginType: string;
   title?: string;
   description?: string;
@@ -73,7 +77,7 @@ type CreateSlateData<TPlugins> = (
   custom?: CreateDataCustomizer<TPlugins>
 ) => SlateState;
 export type SlateCellPlugin<
-  TPlugins extends SlatePluginCollection = DefaultPlugins
+  TPlugins extends SlatePluginCollection = DefaultPlugins,
 > = CellPlugin<SlateState, Omit<SlateState, 'selection'>> & {
   createData: CreateSlateData<TPlugins>;
   createDataFromHtml: (html: string) => Promise<SlateState>;
@@ -167,7 +171,6 @@ function plugin<TPlugins extends SlatePluginCollection = DefaultPlugins>(
       ),
     },
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     id: settings.id || (settings as any).name,
     version: settings.version,
     icon: settings.icon,
@@ -197,11 +200,9 @@ function plugin<TPlugins extends SlatePluginCollection = DefaultPlugins>(
     }),
     cellClassName: 'slate',
     unserialize: (s) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if ((s as any)?.importFromHtml) {
         // this is no longer supported, but we do not delete it
         return {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           importFromHtml: (s as any).importFromHtml,
           ...s,
           ...createInitialData(),

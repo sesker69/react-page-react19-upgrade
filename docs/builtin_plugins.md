@@ -4,7 +4,7 @@ A few essential cell plugins are provided as part of react-page, as separate pac
 
 The RTE editor based on Slate is also a cell plugin. See [Rich Text Editing](/slate.md) for full details.
 
------------------------------
+---
 
 ## Spacer
 
@@ -25,7 +25,7 @@ export const cellPlugins = [
 
 This plugin is a separate package: [@react-page/plugins-spacer](https://www.npmjs.com/package/@react-page/plugins-spacer)
 
------------------------------
+---
 
 ## Divider
 
@@ -46,7 +46,7 @@ export const cellPlugins = [
 
 This plugin is a separate package: [@react-page/plugins-divider](https://www.npmjs.com/package/@react-page/plugins-divider)
 
------------------------------
+---
 
 ## Image
 
@@ -97,7 +97,7 @@ function uploadImageShim(defaultUrl) {
 
 This plugin is a separate package: [@react-page/plugins-image](https://www.npmjs.com/package/@react-page/plugins-image)
 
------------------------------
+---
 
 ## Background control
 
@@ -125,17 +125,14 @@ export const cellPlugins = [
       ModeEnum.GRADIENT_MODE_FLAG,
   }),
 ];
-````
+```
 
 The `enabledModes` setting controls the 3 tabs on the background plugin, enabling/disabling each in turn:
 
-* IMAGE_MODE_FLAG - allows one to add an image as the background
-* COLOR_MODE_FLAG - allows one to set the background color
-* GRADIENT_MODE_FLAG - allows one to create gradients of multiple colors
+- IMAGE_MODE_FLAG - allows one to add an image as the background
+- COLOR_MODE_FLAG - allows one to set the background color
+- GRADIENT_MODE_FLAG - allows one to create gradients of multiple colors
 
 ### Installing
 
 This plugin is a separate package: [@react-page/plugins-background](https://www.npmjs.com/package/@react-page/plugins-background)
-
-
-

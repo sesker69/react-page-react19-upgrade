@@ -19,7 +19,14 @@ import {
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import fakeDataProvider from 'ra-data-fakerest';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
+
+// React 19 use() hook - with fallback for compatibility
+const useHook =
+  (React as any).use ||
+  ((promise: Promise<any>) => {
+    throw promise; // This will trigger Suspense boundary
+  });
 import {
   Create,
   Datagrid,
@@ -146,17 +153,27 @@ const ProductIdSelector = (props: any) => (
   />
 );
 
-const ProductTeaser: React.FC<{ productId: string }> = ({ productId }) => {
-  // this component would live in your frontend
-  // you won't load data from admin here, but from the public frontend api
-  // for this example, we use the dataprovider, but in real-live-applications, that would not be the case
-  const [product, setProduct] = useState<RecordType | null>(null);
-  useEffect(() => {
-    dataProvider
+// Create a cache for product promises to avoid duplicate requests
+const productCache = new Map<string, Promise<RecordType>>();
+
+const getProduct = (productId: string): Promise<RecordType> => {
+  if (!productCache.has(productId)) {
+    const promise = dataProvider
       .getOne('products', { id: productId })
-      .then((r) => setProduct(r.data));
-  }, [productId]);
-  return product ? (
+      .then((r) => r.data);
+    productCache.set(productId, promise);
+  }
+  return productCache.get(productId)!;
+};
+
+// React 19: Using the new use() hook for async data fetching
+const ProductTeaserContent: React.FC<{ productId: string }> = ({
+  productId,
+}) => {
+  // React 19: use() hook replaces useEffect + useState pattern
+  const product = useHook(getProduct(productId));
+
+  return (
     <Card>
       <CardMedia
         image={product.imageUrl}
@@ -170,7 +187,31 @@ const ProductTeaser: React.FC<{ productId: string }> = ({ productId }) => {
         </Typography>
       </CardContent>
     </Card>
-  ) : null;
+  );
+};
+
+// Wrapper component with Suspense boundary
+const ProductTeaser: React.FC<{ productId: string }> = ({ productId }) => {
+  return (
+    <Suspense
+      fallback={
+        <Card
+          style={{
+            height: 350,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Typography variant="body2" color="textSecondary">
+            Loading product...
+          </Typography>
+        </Card>
+      }
+    >
+      <ProductTeaserContent productId={productId} />
+    </Suspense>
+  );
 };
 const recommendedProducts: CellPlugin<{
   productIds: string[];

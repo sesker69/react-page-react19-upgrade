@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
-
 import Ajv from 'ajv';
 
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
@@ -9,7 +7,7 @@ ajv.addKeyword('uniforms');
 
 function createValidator<T extends DataTType>(schema: JsonSchema<T>) {
   const validator = ajv.compile(schema);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   return (model: any) => {
     validator(model);
     if (validator.errors && validator.errors.length) {
@@ -44,9 +42,9 @@ function makeUniformsSchema<T extends DataTType>(
     }
     return props;
   };
-  
+
   // Add getInitialModel method for uniforms v4 compatibility
-  (bridge as any).getInitialModel = function() {
+  (bridge as any).getInitialModel = function () {
     return this.getSubfields().reduce(
       (acc: any, fieldName: string) => ({
         ...acc,
@@ -55,7 +53,7 @@ function makeUniformsSchema<T extends DataTType>(
       {}
     );
   };
-  
+
   return bridge;
 }
 

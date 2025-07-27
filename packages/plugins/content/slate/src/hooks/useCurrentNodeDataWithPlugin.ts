@@ -16,7 +16,6 @@ export const getCurrentNodeDataWithPlugin = <T extends DataTType>(
       return (currentNode as Record<string, unknown>)[plugin.type] as T;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { data } = currentNode as any;
     return data as T;
   } else if (plugin.getInitialData) {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FC, PropsWithChildren } from 'react';
 import React, { useEffect } from 'react';
 import type { DisplayModes } from '../actions/display';
@@ -11,7 +10,7 @@ import {
 } from './hooks';
 
 // this might break in future, but its better than nothing
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 function findReactElement(node: any) {
   for (const key in node) {
     if (

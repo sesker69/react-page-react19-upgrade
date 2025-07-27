@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Slider from '@mui/material/Slider';

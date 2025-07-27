@@ -70,7 +70,7 @@ function PluginButton(props: Props) {
         icon={
           plugin.icon ??
           (plugin.pluginType === 'component'
-            ? plugin.deserialize?.tagName ?? ''
+            ? (plugin.deserialize?.tagName ?? '')
             : '')
         }
         toolTip={t(plugin.label) ?? ''}

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { PropsWithChildren, ReactNode } from 'react';
 import React, { forwardRef } from 'react';
 import type { AutoFormProps } from 'uniforms';

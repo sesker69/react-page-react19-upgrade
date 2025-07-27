@@ -1,6 +1,6 @@
 import type { DataTAny, DataTType, JsonSchema } from '@react-page/editor';
 import type { ReactNode } from 'react';
-import React from 'react';
+import type React from 'react';
 import type { Editor, Node } from 'slate';
 import type { Data } from '../types';
 import type { Translations } from './translations';
@@ -89,7 +89,6 @@ export type SlateBasePluginDefinition<T extends Data> = {
 
   isDisabled?: (editor: Editor) => Promise<boolean>;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onKeyDown?: (e: React.KeyboardEvent, editor: Editor, next: any) => void;
 
   customAdd?: (editor: Editor) => void | Promise<void>;
@@ -134,7 +133,7 @@ type InlineProps = {
 type MarkProps = {
   object: 'mark';
 };
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 type NoInfer<T> = [T][T extends any ? 0 : never];
 
 type SlateComponentPluginComponent<T extends Data> =
@@ -213,7 +212,6 @@ export type SlateComponentPluginDefinition<T extends Data> =
      */
   } & (ObjectProps | InlineProps | MarkProps);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type SlatePluginDefinition<T extends DataTType = DataTAny> =
   | (SlateComponentPluginDefinition<T> & { pluginType: 'component' })
   | (SlateDataPluginDefinition<T> & { pluginType: 'data' })

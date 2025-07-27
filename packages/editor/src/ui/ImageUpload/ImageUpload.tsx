@@ -31,48 +31,54 @@ const ImageUpload: React.FC<ImageUploadProps & { t: TranslatorFunction }> = ({
     errorText: '',
     progress: 0,
   });
-  
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const hasExtension = useCallback((fileName: string) => {
-    const patternPart = allowedExtensions
-      ? allowedExtensions.map((a) => a.toLowerCase()).join('|')
-      : '';
-    const pattern = '(' + patternPart.replace(/\./g, '\\.') + ')$';
-    return new RegExp(pattern, 'i').test(fileName.toLowerCase());
-  }, [allowedExtensions]);
+  const hasExtension = useCallback(
+    (fileName: string) => {
+      const patternPart = allowedExtensions
+        ? allowedExtensions.map((a) => a.toLowerCase()).join('|')
+        : '';
+      const pattern = '(' + patternPart.replace(/\./g, '\\.') + ')$';
+      return new RegExp(pattern, 'i').test(fileName.toLowerCase());
+    },
+    [allowedExtensions]
+  );
 
-  const handleError = useCallback((errorCode: number) => {
-    let errorText: string | null;
+  const handleError = useCallback(
+    (errorCode: number) => {
+      let errorText: string | null;
 
-    switch (errorCode) {
-      case NO_FILE_ERROR_CODE:
-        errorText = t(translations?.noFileError);
-        break;
-      case BAD_EXTENSION_ERROR_CODE:
-        errorText = t(translations?.badExtensionError);
-        break;
-      case TOO_BIG_ERROR_CODE:
-        errorText = t(translations?.tooBigError);
-        break;
-      case UPLOADING_ERROR_CODE:
-        errorText = t(translations?.uploadingError);
-        break;
-      default:
-        errorText = t(translations?.unknownError);
-        break;
-    }
-    
-    // Need to flick "isUploading" because otherwise the handler doesn't fire properly
-    setState({ hasError: true, errorText, isUploading: true, progress: 0 });
-    setTimeout(() => {
-      setState(prev => ({ ...prev, isUploading: false }));
-    }, 0);
-    
-    setTimeout(() => {
-      setState(prev => ({ ...prev, hasError: false, errorText: '' }));
-    }, 5000);
-  }, [t, translations]);
+      switch (errorCode) {
+        case NO_FILE_ERROR_CODE:
+          errorText = t(translations?.noFileError);
+          break;
+        case BAD_EXTENSION_ERROR_CODE:
+          errorText = t(translations?.badExtensionError);
+          break;
+        case TOO_BIG_ERROR_CODE:
+          errorText = t(translations?.tooBigError);
+          break;
+        case UPLOADING_ERROR_CODE:
+          errorText = t(translations?.uploadingError);
+          break;
+        default:
+          errorText = t(translations?.unknownError);
+          break;
+      }
+
+      // Need to flick "isUploading" because otherwise the handler doesn't fire properly
+      setState({ hasError: true, errorText, isUploading: true, progress: 0 });
+      setTimeout(() => {
+        setState((prev) => ({ ...prev, isUploading: false }));
+      }, 0);
+
+      setTimeout(() => {
+        setState((prev) => ({ ...prev, hasError: false, errorText: '' }));
+      }, 5000);
+    },
+    [t, translations]
+  );
 
   const readFile = useCallback((file: File): Promise<ImageLoaded> => {
     return new Promise((resolve, reject) => {
@@ -81,7 +87,7 @@ const ImageUpload: React.FC<ImageUploadProps & { t: TranslatorFunction }> = ({
       // Read the image via FileReader API and save image result in state.
       reader.onload = function (e: ProgressEvent) {
         // Add the file name to the data URL
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
         let dataUrl: string = (e.target as any).result;
         dataUrl = dataUrl.replace(';base64', `;name=${file.name};base64`);
         resolve({ file, dataUrl });
@@ -92,43 +98,62 @@ const ImageUpload: React.FC<ImageUploadProps & { t: TranslatorFunction }> = ({
   }, []);
 
   const handleReportProgress = useCallback((progress: number) => {
-    setState(prev => ({ ...prev, progress }));
+    setState((prev) => ({ ...prev, progress }));
   }, []);
 
-  const handleFileSelected: React.ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
-    if (!e.target.files || !e.target.files[0]) {
-      handleError(NO_FILE_ERROR_CODE);
-      return;
-    }
-    const file = e.target.files[0];
-    if (!hasExtension(file.name)) {
-      handleError(BAD_EXTENSION_ERROR_CODE);
-      return;
-    }
-    if (maxFileSize && file.size > maxFileSize) {
-      handleError(TOO_BIG_ERROR_CODE);
-      return;
-    }
-    if (imageLoaded) {
-      readFile(file).then((data) => imageLoaded?.(data));
-    }
-    if (imageUpload) {
-      setState(prev => ({ ...prev, isUploading: true }));
-      imageUpload(file, handleReportProgress)
-        .then((resp) => {
-          setState(prev => ({ ...prev, progress: undefined, isUploading: false }));
-          imageUploaded && imageUploaded(resp);
-        })
-        .catch((error) => {
-          setState(prev => ({ ...prev, isUploading: false }));
-          imageUploadError && imageUploadError(error);
-        });
-    }
-  }, [hasExtension, maxFileSize, imageLoaded, imageUpload, imageUploaded, imageUploadError, readFile, handleReportProgress, handleError]);
+  const handleFileSelected: React.ChangeEventHandler<HTMLInputElement> =
+    useCallback(
+      (e) => {
+        if (!e.target.files || !e.target.files[0]) {
+          handleError(NO_FILE_ERROR_CODE);
+          return;
+        }
+        const file = e.target.files[0];
+        if (!hasExtension(file.name)) {
+          handleError(BAD_EXTENSION_ERROR_CODE);
+          return;
+        }
+        if (maxFileSize && file.size > maxFileSize) {
+          handleError(TOO_BIG_ERROR_CODE);
+          return;
+        }
+        if (imageLoaded) {
+          readFile(file).then((data) => imageLoaded?.(data));
+        }
+        if (imageUpload) {
+          setState((prev) => ({ ...prev, isUploading: true }));
+          imageUpload(file, handleReportProgress)
+            .then((resp) => {
+              setState((prev) => ({
+                ...prev,
+                progress: undefined,
+                isUploading: false,
+              }));
+              imageUploaded && imageUploaded(resp);
+            })
+            .catch((error) => {
+              setState((prev) => ({ ...prev, isUploading: false }));
+              imageUploadError && imageUploadError(error);
+            });
+        }
+      },
+      [
+        hasExtension,
+        maxFileSize,
+        imageLoaded,
+        imageUpload,
+        imageUploaded,
+        imageUploadError,
+        readFile,
+        handleReportProgress,
+        handleError,
+      ]
+    );
 
-  const handleFileUploadClick: React.MouseEventHandler<HTMLElement> = useCallback(() => {
-    fileInputRef.current?.click();
-  }, []);
+  const handleFileUploadClick: React.MouseEventHandler<HTMLElement> =
+    useCallback(() => {
+      fileInputRef.current?.click();
+    }, []);
 
   const renderChildren = useCallback(() => {
     if (state.isUploading) {
@@ -148,7 +173,14 @@ const ImageUpload: React.FC<ImageUploadProps & { t: TranslatorFunction }> = ({
         {icon as React.ReactNode}
       </span>
     );
-  }, [state.isUploading, state.hasError, state.errorText, state.progress, translations?.buttonContent, icon]);
+  }, [
+    state.isUploading,
+    state.hasError,
+    state.errorText,
+    state.progress,
+    translations?.buttonContent,
+    icon,
+  ]);
 
   return (
     <>

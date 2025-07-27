@@ -86,51 +86,49 @@ export const PluginDrawer: React.FC = React.memo(() => {
 
   return createPortal(
     <Drawer
-        variant="persistent"
-        className="react-page-plugin-drawer"
-        open={isInsertMode}
-        PaperProps={{
-          style: {
-            width: 320,
-          },
-        }}
+      variant="persistent"
+      className="react-page-plugin-drawer"
+      open={isInsertMode}
+      PaperProps={{
+        style: {
+          width: 320,
+        },
+      }}
+    >
+      <List
+        subheader={
+          <ListSubheader>{t(defaultLabels.insertPlugin)}</ListSubheader>
+        }
       >
-        <List
-          subheader={
-            <ListSubheader>{t(defaultLabels.insertPlugin)}</ListSubheader>
-          }
-        >
-          <ListItem>
-            <TextField
-              inputRef={inputRef}
-              placeholder={t(defaultLabels.searchPlaceholder) ?? ''}
-              fullWidth={true}
-              onChange={onSearch}
-            />
-          </ListItem>
-          {filteredPlugins.length === 0 && (
-            <ListSubheader>
-              {t(defaultLabels.noPluginFoundContent)}
-            </ListSubheader>
-          )}
-        </List>
-        {filteredPlugins.length > 0 && (
-          <List>
-            {filteredPlugins.map((plugin, k: number) => {
-              return (
-                <Item
-                  translations={defaultLabels}
-                  plugin={plugin}
-                  key={k.toString()}
-                  insert={{
-                    plugin: plugin.id,
-                  }}
-                />
-              );
-            })}
-          </List>
+        <ListItem>
+          <TextField
+            inputRef={inputRef}
+            placeholder={t(defaultLabels.searchPlaceholder) ?? ''}
+            fullWidth={true}
+            onChange={onSearch}
+          />
+        </ListItem>
+        {filteredPlugins.length === 0 && (
+          <ListSubheader>{t(defaultLabels.noPluginFoundContent)}</ListSubheader>
         )}
-      </Drawer>,
+      </List>
+      {filteredPlugins.length > 0 && (
+        <List>
+          {filteredPlugins.map((plugin, k: number) => {
+            return (
+              <Item
+                translations={defaultLabels}
+                plugin={plugin}
+                key={k.toString()}
+                insert={{
+                  plugin: plugin.id,
+                }}
+              />
+            );
+          })}
+        </List>
+      )}
+    </Drawer>,
     document.body
   );
 });

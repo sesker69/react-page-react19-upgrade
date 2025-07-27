@@ -127,11 +127,11 @@ describe('useDebouncedCellData', () => {
     const store = createStore(theState);
     let renderCount = 0;
     let firstSetData: any = null;
-    
+
     const Component: React.FC<unknown> = () => {
       const [, setData] = useDebouncedCellData('cell0');
       renderCount++;
-      
+
       if (renderCount === 1) {
         firstSetData = setData;
       } else if (renderCount === 2) {

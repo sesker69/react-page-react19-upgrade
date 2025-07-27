@@ -47,7 +47,6 @@ describe('optimizeRow', () => {
     },
   ].forEach((c, k) => {
     it(`should pass test case ${k}`, () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect(optimizeRow(c.in as any), 'to equal', c.out);
     });
   });
@@ -78,7 +77,6 @@ describe('optimizeCell', () => {
   ].forEach((c, k) => {
     it(`should pass test case ${k}`, () => {
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         deepEquals(c.out, optimizeCell(c.in as any) as any),
         'to be truthy'
       );

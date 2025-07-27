@@ -20,20 +20,29 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   const [isColorPickerVisible, setIsColorPickerVisible] = useState(false);
   const anchorElRef = useRef<HTMLButtonElement>(null);
 
-  const handleClickShowColorPicker = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    if (onDialogOpen) {
-      onDialogOpen();
-    }
-    setIsColorPickerVisible(prev => !prev);
-  }, [onDialogOpen]);
+  const handleClickShowColorPicker = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      if (onDialogOpen) {
+        onDialogOpen();
+      }
+      setIsColorPickerVisible((prev) => !prev);
+    },
+    [onDialogOpen]
+  );
 
-  const handleChange: ColorChangeHandler = useCallback((e) => {
-    onChange?.(e.rgb);
-  }, [onChange]);
+  const handleChange: ColorChangeHandler = useCallback(
+    (e) => {
+      onChange?.(e.rgb);
+    },
+    [onChange]
+  );
 
-  const handleChangeComplete: ColorChangeHandler = useCallback((e) => {
-    onChangeComplete?.(e.rgb);
-  }, [onChangeComplete]);
+  const handleChangeComplete: ColorChangeHandler = useCallback(
+    (e) => {
+      onChangeComplete?.(e.rgb);
+    },
+    [onChangeComplete]
+  );
 
   return (
     <>

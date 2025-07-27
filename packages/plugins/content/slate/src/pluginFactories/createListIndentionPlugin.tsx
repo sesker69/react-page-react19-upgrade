@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 import type { SlatePlugin } from '../types/SlatePlugin';
 
 type Definition = {

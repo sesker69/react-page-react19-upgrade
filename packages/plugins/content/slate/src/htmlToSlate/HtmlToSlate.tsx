@@ -19,7 +19,6 @@ const HtmlToSlate = ({ plugins }: { plugins: SlatePlugin[] }) => {
     const { nodeName } = el;
     const parent = el;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const children: any[] = flatten(
       Array.from(parent.childNodes).map(deserializeElement)
     );
@@ -39,9 +38,9 @@ const HtmlToSlate = ({ plugins }: { plugins: SlatePlugin[] }) => {
       if (!elHtml.style) {
         // xmldom has no style attribute
         // we monkey patch it in for easier style parsing
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
         (elHtml as any).style = new (require('cssstyle').CSSStyleDeclaration)();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
         (elHtml.style as any).cssText = elHtml.getAttribute('style');
       }
       if (matchingPlugin.object === 'mark') {
@@ -69,7 +68,6 @@ const HtmlToSlate = ({ plugins }: { plugins: SlatePlugin[] }) => {
 
     const fragment = deserializeElement(
       parsed.documentElement
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ) as unknown as any[];
     const nodes = Array.isArray(fragment) ? fragment : [fragment];
     // filter empty nodes (that contain only text)

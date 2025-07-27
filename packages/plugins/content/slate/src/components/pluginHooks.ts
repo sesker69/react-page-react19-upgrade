@@ -12,7 +12,6 @@ export const useComponentNodePlugins = (
       plugins.filter(
         (plugin) =>
           plugin.pluginType === 'component' && plugin.object !== 'mark'
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ) as SlateComponentPluginDefinition<any>[],
     deps
   );
@@ -26,7 +25,6 @@ export const useComponentMarkPlugins = (
       plugins.filter(
         (plugin) =>
           plugin.pluginType === 'component' && plugin.object === 'mark'
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ) as SlateComponentPluginDefinition<any>[],
     deps
   );

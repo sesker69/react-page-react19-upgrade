@@ -73,7 +73,7 @@
     "build:watch": "cross-env NODE_ENV=development lerna run build:watch --parallel",
     "clean": "lerna run clean",
     "clean:lerna": "lerna clean --yes",
-    "lint": "eslint -c .eslintrc.js '*/**/*.{js,ts,tsx}'",
+    "lint": "eslint '*/**/*.{js,ts,tsx}'",
     "lint:watch": "npm-run-all watch:ts -- -c \"npm-run-all lint\"",
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",

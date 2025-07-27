@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
-
 import type { AnyAction } from 'redux';
 import type { CellAction, ResizeCellAction } from '../../actions/cell';
 import {
@@ -171,7 +169,6 @@ export const cells = (
 
   switch (action.type) {
     case CELL_RESIZE:
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       newCells = resizeCells(newCells, action as ResizeCellAction);
       break;
     case CELL_INSERT_AT_END:
@@ -254,7 +251,6 @@ export const cells = (
       break;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const reducedCells = newCells.map((c) => cell(c, action as any, depth));
   return optimizeCells(reducedCells);
 };
@@ -315,8 +311,6 @@ const row = (s: Row, a: AnyAction, depth: number): Row =>
 
 export const rows = (s: Row[] = [], a: AnyAction, depth = 0): Row[] =>
   optimizeRows(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-
     ((state: Row[], action): Row[] => {
       const reduce = () => state.map((r) => row(r, action, depth));
       switch (action.type) {

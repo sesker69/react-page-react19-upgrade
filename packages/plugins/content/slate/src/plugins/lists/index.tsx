@@ -5,18 +5,26 @@ import createIndentionPlugin from '../../pluginFactories/createListIndentionPlug
 import createListPlugin from '../../pluginFactories/createListPlugin';
 import { LI, OL, UL } from './constants';
 
-const ListIcon = lazyLoad(
-  () => import('@mui/icons-material/FormatListBulleted').then(module => ({ default: module.default }))
+const ListIcon = lazyLoad(() =>
+  import('@mui/icons-material/FormatListBulleted').then((module) => ({
+    default: module.default,
+  }))
 );
-const OrderedListIcon = lazyLoad(
-  () => import('@mui/icons-material/FormatListNumbered').then(module => ({ default: module.default }))
+const OrderedListIcon = lazyLoad(() =>
+  import('@mui/icons-material/FormatListNumbered').then((module) => ({
+    default: module.default,
+  }))
 );
 
-const IncreaseIndentIcon = lazyLoad(
-  () => import('@mui/icons-material/FormatIndentIncrease').then(module => ({ default: module.default }))
+const IncreaseIndentIcon = lazyLoad(() =>
+  import('@mui/icons-material/FormatIndentIncrease').then((module) => ({
+    default: module.default,
+  }))
 );
-const DecreaseIndentIcon = lazyLoad(
-  () => import('@mui/icons-material/FormatIndentDecrease').then(module => ({ default: module.default }))
+const DecreaseIndentIcon = lazyLoad(() =>
+  import('@mui/icons-material/FormatIndentDecrease').then((module) => ({
+    default: module.default,
+  }))
 );
 
 const ol = createListPlugin({

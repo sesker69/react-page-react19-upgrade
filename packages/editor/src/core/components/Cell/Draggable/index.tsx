@@ -34,7 +34,11 @@ const Draggable: FC<PropsWithChildren<Props>> = ({
     <>
       {previewElement}
       <div
-        ref={isLayoutMode ? (dragRef as unknown as React.Ref<HTMLDivElement>) : undefined}
+        ref={
+          isLayoutMode
+            ? (dragRef as unknown as React.Ref<HTMLDivElement>)
+            : undefined
+        }
         style={{
           height: '100%',
         }}

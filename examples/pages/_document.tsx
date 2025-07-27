@@ -18,7 +18,6 @@ export default class MyDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           enhanceApp: (App: any) => (props: any) =>
             styledComponentsSheet.collectStyles(
               <App emotionCache={cache} {...props} />
@@ -31,7 +30,6 @@ export default class MyDocument extends Document {
         <style
           data-emotion={`${style.key} ${style.ids.join(' ')}`}
           key={style.key}
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: style.css }}
         />
       ));

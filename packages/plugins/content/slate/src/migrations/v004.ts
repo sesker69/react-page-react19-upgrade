@@ -2,12 +2,11 @@ import { Migration } from '@react-page/editor';
 import isEmpty from 'lodash.isempty';
 import type { Element, Node, Text } from 'slate';
 // this is for slate 0.50.0
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 
 type OldMark = {
   object: 'mark';
   type: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   data?: { [key: string]: any };
 };
 
@@ -20,7 +19,7 @@ type OldElementNode = {
   object: 'block' | 'inline';
   type: string;
   isVoid: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   data: { [key: string]: any };
   nodes: OldNode[];
 };
@@ -45,7 +44,6 @@ const migrateElementNode = (node: OldElementNode): Element => {
     data: node.data ?? {},
     type: node.type,
     children: node.nodes?.map(migrateNode) ?? [],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any;
 };
 const migrateNode = (oldNode: OldNode): Node => {
@@ -64,7 +62,7 @@ const migration = new Migration({
     }
 
     const slate = state.serialized?.document?.nodes?.map(migrateNode) ?? [];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     const result: any = { slate };
 
     if (state.importFromHtml) {

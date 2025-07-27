@@ -36,7 +36,10 @@ const FallbackDropArea: FC<PropsWithChildren> = ({ children }) => {
   );
 
   return (
-    <div ref={dropRef as unknown as React.Ref<HTMLDivElement>} onClick={clearReference}>
+    <div
+      ref={dropRef as unknown as React.Ref<HTMLDivElement>}
+      onClick={clearReference}
+    >
       {children}
     </div>
   );

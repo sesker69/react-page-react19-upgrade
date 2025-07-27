@@ -6,7 +6,7 @@ import type { CellSpacing } from './renderOptions';
 import type { PropsWithChildren } from 'react';
 
 export type DataTType = Record<string, unknown>;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export type DataTAny = any;
 
 export type CellPluginOnChangeOptions = {
@@ -149,7 +149,7 @@ export type PluginHandler = (
 
 export type CellPlugin<
   DataT extends DataTType = DataTAny,
-  DataSerializedT = DataT
+  DataSerializedT = DataT,
 > = {
   /**
    * the plugins unique id. Only one plugin with the same id may be used

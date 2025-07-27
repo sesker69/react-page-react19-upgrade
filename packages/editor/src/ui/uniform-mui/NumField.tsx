@@ -35,7 +35,11 @@ function Num({
       disabled={disabled}
       error={!!error}
       fullWidth
-      helperText={((error && showInlineError && errorMessage) || helperText || '') as React.ReactNode}
+      helperText={
+        ((error && showInlineError && errorMessage) ||
+          helperText ||
+          '') as React.ReactNode
+      }
       inputProps={{
         min,
         max,

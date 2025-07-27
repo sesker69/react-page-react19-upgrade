@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Migration } from '@react-page/editor';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const removeLeaves = (nodes: Array<any>): Array<any> => {
   if (!nodes) {
     return [];

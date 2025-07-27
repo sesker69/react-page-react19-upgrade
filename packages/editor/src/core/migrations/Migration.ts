@@ -11,7 +11,7 @@ interface MigrationConfig<TIn, TOut> {
 
   /**@deprecated use fromVersion instead */
   fromVersionRange?: MigrationVersion;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   migrate: (state: TIn, context: MigrationContext) => TOut;
 }
 
@@ -31,7 +31,7 @@ export const sanitizeVersion = (version?: MigrationVersion) => {
 /**
  * @class the class used to migrate plugin content between toVersion
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export class Migration<TIn = any, TOut = TIn> {
   toVersion: number;
   fromVersion: number;

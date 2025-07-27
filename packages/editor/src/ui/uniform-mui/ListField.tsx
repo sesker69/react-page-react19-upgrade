@@ -50,7 +50,6 @@ function List({
                   key: `${itemIndex}-${childIndex}`,
                   name: (child.props as any).name?.replace('$', '' + itemIndex),
                   ...itemProps,
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 } as any)
               : child
           )

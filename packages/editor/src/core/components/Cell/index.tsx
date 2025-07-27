@@ -69,13 +69,9 @@ const Cell: React.FC<Props> = ({ nodeId, measureRef }) => {
     },
     [nodeId, isInsertMode, setReferenceNodeId]
   );
-  useScrollToViewEffect(
-    nodeId,
-    () => {
-      if (ref.current) scrollIntoViewWithOffset(ref.current, 120); // 120 is just a sane default, we might make int configurable in the future
-    },
-    [ref.current]
-  );
+  useScrollToViewEffect(nodeId, () => {
+    if (ref.current) scrollIntoViewWithOffset(ref.current, 120); // 120 is just a sane default, we might make int configurable in the future
+  }, [ref.current]);
   if (isDraftInLang && isPreviewMode) {
     return null;
   }
@@ -119,7 +115,6 @@ const Cell: React.FC<Props> = ({ nodeId, measureRef }) => {
         <MoveActions nodeId={nodeId} />
       ) : null}
       <div
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ref={measureRef as any}
         style={{
           height: '100%',

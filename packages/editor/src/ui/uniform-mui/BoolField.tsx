@@ -42,10 +42,19 @@ function Bool(props: BoolFieldProps) {
   const SelectionControl =
     appearance === 'checkbox' || appearance === undefined ? Checkbox : Switch;
 
-  const filteredProps = omit(filterDOMProps(props), ['helperText', 'fullWidth', 'slotProps', 'size']);
+  const filteredProps = omit(filterDOMProps(props), [
+    'helperText',
+    'fullWidth',
+    'slotProps',
+    'size',
+  ]);
   // Add size back only if it's not 'large' and component supports it
-  const componentSize = props.size && props.size !== 'large' ? props.size : undefined;
-  if (componentSize && (appearance === 'checkbox' || appearance === undefined)) {
+  const componentSize =
+    props.size && props.size !== 'large' ? props.size : undefined;
+  if (
+    componentSize &&
+    (appearance === 'checkbox' || appearance === undefined)
+  ) {
     (filteredProps as any).size = componentSize;
   }
 

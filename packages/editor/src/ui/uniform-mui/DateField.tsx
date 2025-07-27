@@ -44,7 +44,11 @@ function Date({
       disabled={disabled}
       error={!!error}
       fullWidth
-      helperText={((error && showInlineError && errorMessage) || helperText || '') as React.ReactNode}
+      helperText={
+        ((error && showInlineError && errorMessage) ||
+          helperText ||
+          '') as React.ReactNode
+      }
       label={label}
       InputLabelProps={{ shrink: true, ...labelProps, ...InputLabelProps }}
       inputProps={{ readOnly, ...props.inputProps }}

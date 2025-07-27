@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-types */
-
-import React from 'react';
+import type React from 'react';
 import { getAlignmentFromElement } from '../plugins/paragraphs';
 import type { SlateComponentPluginDefinition } from '../types/slatePluginDefinitions';
 import createComponentPlugin from './createComponentPlugin';
@@ -47,7 +45,7 @@ function createSimpleHtmlBlockPlugin<T = {}>(def: Def<HtmlBlockData<T>>) {
     addHoverButton: false,
     deserialize: {
       tagName: def.tagName as string,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
       getData: def.getData || (getAlignmentFromElement as any),
     },
     getStyle: (data) => ({

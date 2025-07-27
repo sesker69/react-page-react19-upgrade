@@ -27,7 +27,11 @@ const LongText = ({
       disabled={disabled}
       error={!!error}
       fullWidth
-      helperText={((error && showInlineError && errorMessage) || helperText || '') as React.ReactNode}
+      helperText={
+        ((error && showInlineError && errorMessage) ||
+          helperText ||
+          '') as React.ReactNode
+      }
       inputProps={{ readOnly }}
       label={label}
       margin="dense"

@@ -37,7 +37,7 @@ export const focus = (
       const nodeIds =
         action.mode === 'add'
           ? state?.nodeIds?.includes(action.id)
-            ? stateWithout(state, [action.id])?.nodeIds ?? []
+            ? (stateWithout(state, [action.id])?.nodeIds ?? [])
             : [...(state?.nodeIds ?? []), action.id]
           : [action.id];
 

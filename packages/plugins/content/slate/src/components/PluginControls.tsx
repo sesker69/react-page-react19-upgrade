@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { DataTType, JsonSchema } from '@react-page/editor';
 import React, {
   useCallback,
@@ -35,11 +34,14 @@ function PluginControls(
 ) {
   const { plugin } = props;
 
-  const storedPropsRef = useRef<{
-    selection: Range;
-    isActive: boolean;
-    data: DataTType;
-  } | undefined>(undefined);
+  const storedPropsRef = useRef<
+    | {
+        selection: Range;
+        isActive: boolean;
+        data: DataTType;
+      }
+    | undefined
+  >(undefined);
 
   const isVoid =
     plugin.pluginType === 'component' &&

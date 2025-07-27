@@ -58,7 +58,6 @@ const base64: (string: string) => string =
     : btoa;
 const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 
-// eslint-disable-next-line complexity
 function Select(props: SelectFieldProps) {
   const value = props.value ?? '';
 
@@ -88,7 +87,8 @@ function Select(props: SelectFieldProps) {
       'size',
     ]);
     // Add size back only if it's not 'large' and component supports it
-    const componentSize = props.size && props.size !== 'large' ? props.size : undefined;
+    const componentSize =
+      props.size && props.size !== 'large' ? props.size : undefined;
     if (componentSize && (appearance === 'checkbox' || fieldType !== Array)) {
       (filteredProps as any).size = componentSize;
     }
@@ -193,7 +193,11 @@ function Select(props: SelectFieldProps) {
       disabled={disabled}
       error={!!error}
       fullWidth={fullWidth}
-      helperText={((error && showInlineError && errorMessage) || helperText || '') as React.ReactNode}
+      helperText={
+        ((error && showInlineError && errorMessage) ||
+          helperText ||
+          '') as React.ReactNode
+      }
       InputLabelProps={{
         shrink: !!label && (hasPlaceholder || hasValue),
         ...labelProps,

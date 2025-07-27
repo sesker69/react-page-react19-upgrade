@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 import type { CSSProperties } from 'react';
 import { LI, LISTS_TYPE_PREFIX } from '../plugins/lists/constants';
 import type { SlatePlugin } from '../types/SlatePlugin';
@@ -87,22 +87,19 @@ function createSlatePlugins<T, CT>(
   ];
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mergeCustomizer(c1: any, c2: any): any {
   return {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     customizeList(def: any) {
       const def2 = c1?.customizeList ? c1.customizeList(def) : def;
       return c2?.customizeList ? c2.customizeList(def2) : def2;
     },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     customizeListItem(def: any) {
       const def2 = c1?.customizeList ? c1.customizeListItem(def) : def;
       return c2?.customizeList ? c2.customizeListItem(def2) : def2;
     },
   };
 }
-// eslint-disable-next-line @typescript-eslint/ban-types
 function createListPlugin<T = {}>(defRaw: ListDef) {
   const def: ListDef = {
     ...defRaw,

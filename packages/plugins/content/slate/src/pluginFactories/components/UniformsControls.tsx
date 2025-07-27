@@ -22,7 +22,6 @@ function Controls<T extends Data>(
 
   const hasSchema = Boolean(props.schema);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const formRef = useRef<any>(undefined);
 
   const [text, setText] = useState<string | null>(null);
@@ -32,7 +31,6 @@ function Controls<T extends Data>(
   };
 
   const saveAndCloseWithData = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (data: any) => {
       props.close();
       if (props.shouldInsertWithText) {
@@ -85,7 +83,6 @@ function Controls<T extends Data>(
         {hasSchema && uniformsSchema ? (
           <AutoForm
             ref={formRef}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             model={props.data as any}
             schema={uniformsSchema as any}
             onSubmit={saveAndCloseWithData}

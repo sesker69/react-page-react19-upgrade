@@ -26,10 +26,9 @@ const transformChildren = (defNodes: SlateDefNode[]): Node[] =>
   defNodes.map((defNode) => {
     if ((defNode as SlatePluginNode).plugin) {
       const defPluginNode: SlatePluginNode = defNode as SlatePluginNode;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
       const slatePluginOrList = (defPluginNode.plugin as any).toPlugin
-        ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (defPluginNode.plugin as any).toPlugin()
+        ? (defPluginNode.plugin as any).toPlugin()
         : defPluginNode.plugin;
 
       // the result of plugin.toPlugin might be an array, e.g. the list plugin is an array, because it defines ul, li AND indention-options on the same plugin

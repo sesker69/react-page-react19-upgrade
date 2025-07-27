@@ -42,7 +42,7 @@ export const cellHover = (
   const hoverId =
     level === 0
       ? hover.id
-      : hover.ancestorIds?.[Math.max(0, level - 1)] ?? hover.id;
+      : (hover.ancestorIds?.[Math.max(0, level - 1)] ?? hover.id);
   return {
     type: CELL_DRAG_HOVER,
     ts: new Date(),

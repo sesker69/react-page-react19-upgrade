@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import type { SlatePlugin } from '../types/SlatePlugin';
 import type { SlateComponentPluginDefinition } from '../types/slatePluginDefinitions';
 

@@ -209,8 +209,8 @@ export const useCellBounds = (nodeId: string) => {
 export const useNodeChildrenIds = (nodeId: string) => {
   return useNodeProps(nodeId, (node) =>
     isRow(node)
-      ? node?.cells?.map((c) => c.id) ?? []
-      : node?.rows?.map((r) => r.id) ?? []
+      ? (node?.cells?.map((c) => c.id) ?? [])
+      : (node?.rows?.map((r) => r.id) ?? [])
   );
 };
 
@@ -221,9 +221,7 @@ export const useNodeChildrenIds = (nodeId: string) => {
  */
 export const useNodeHasChildren = (nodeId: string) => {
   return useNodeProps(nodeId, (node) =>
-    isRow(node)
-      ? (node.cells?.length ?? 0) > 0
-      : (node?.rows?.length ?? 0) > 0
+    isRow(node) ? (node.cells?.length ?? 0) > 0 : (node?.rows?.length ?? 0) > 0
   );
 };
 /**
@@ -379,7 +377,7 @@ export const useDebouncedCellData = (nodeId: string) => {
 
   const cellDataRef = useRef(cellData);
   cellDataRef.current = cellData;
-  
+
   const onChange = useCallback(
     (
       partialData: Record<string, unknown>,
@@ -388,7 +386,6 @@ export const useDebouncedCellData = (nodeId: string) => {
       const lang = options?.lang ?? currentLang;
       // if one debounced callback exists for the same language, cancel it
       if (updateHandles.current?.[lang]?.timeoutHandle)
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         clearTimeout(updateHandles.current[lang].timeoutHandle!);
       if (!updateHandles.current[lang]) {
         updateHandles.current[lang] = {};

@@ -19,7 +19,9 @@ function isElementInViewport(el: HTMLDivElement) {
   );
 }
 
-export const useKeepScrollPosition = (ref: RefObject<HTMLDivElement | null>) => {
+export const useKeepScrollPosition = (
+  ref: RefObject<HTMLDivElement | null>
+) => {
   const mode = useDisplayMode();
   const firstElementInViewPortref = React.useRef<{
     el: HTMLDivElement;

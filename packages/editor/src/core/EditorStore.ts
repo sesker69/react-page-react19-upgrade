@@ -16,8 +16,6 @@ export type Languages = Array<{
   label: string;
 }>;
 export interface CoreEditorProps<T extends RootState = RootState> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-
   middleware?: Middleware[];
 
   store?: Store<T> | null;
@@ -47,6 +45,6 @@ class EditorStore<T extends RootState = RootState> {
 }
 
 export const createEmptyState: () => Value = () =>
-  ({ id: createId(), rows: [], version: CURRENT_EDITABLE_VERSION } as Value);
+  ({ id: createId(), rows: [], version: CURRENT_EDITABLE_VERSION }) as Value;
 
 export default EditorStore;
