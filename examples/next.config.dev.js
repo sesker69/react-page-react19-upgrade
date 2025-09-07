@@ -3,10 +3,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 const path = require('path');
 
-// Only use static export for production builds
-const isProduction = process.env.NODE_ENV === 'production';
-const isBuild = process.env.npm_lifecycle_event === 'build';
-
 module.exports = withBundleAnalyzer({
   basePath: process.env.RELEASE_CHANNEL
     ? !process.env.RELEASE_CHANNEL || process.env.RELEASE_CHANNEL === 'latest'
@@ -29,8 +25,7 @@ module.exports = withBundleAnalyzer({
   experimental: {
     esmExternals: 'loose',
   },
-  // Only use static export for production builds
-  ...(isBuild && { output: 'export' }),
+  // Remove output: 'export' for development
   transpilePackages: ['react-dnd', 'react-dnd-html5-backend', 'dnd-core'],
   webpack: (config, { isServer }) => {
     if (!isServer) {
@@ -39,17 +34,6 @@ module.exports = withBundleAnalyzer({
         fs: false,
       };
     }
-    
-    // Add polyfill for findDOMNode
-    const originalEntry = config.entry;
-    config.entry = async () => {
-      const entries = await originalEntry();
-      if (entries['main.js'] && !entries['main.js'].includes('./polyfills/react-dom-polyfill.js')) {
-        entries['main.js'].unshift('./polyfills/react-dom-polyfill.js');
-      }
-      return entries;
-    };
-    
     return config;
   },
 });

@@ -19,9 +19,8 @@
     "clean": "rimraf \"lib\" && rimraf \"lib-es\" && rm -f *.tsbuildinfo"
   },
   "peerDependencies": {
-    "react": ">= 16.14",
-    "react-dom": ">= 16.14",
-    "@mui/material": "*"
+    "react": ">= 19.0",
+    "react-dom": ">= 19.0"
   },
   "dependencies": {
     "@react-page/editor": "0.0.0"

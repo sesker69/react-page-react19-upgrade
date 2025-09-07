@@ -37,7 +37,7 @@ type PluginHandlerName =
   | 'handleFocusPreviousHotKey';
 
 let lastFocused: HTMLDivElement | null = null;
-const GlobalHotKeys: React.FC<{ focusRef: RefObject<HTMLDivElement> }> = ({
+const GlobalHotKeys: React.FC<{ focusRef: RefObject<HTMLDivElement | null> }> = ({
   focusRef,
 }) => {
   const editor = useEditorStore();

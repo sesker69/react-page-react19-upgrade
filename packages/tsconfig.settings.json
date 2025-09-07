@@ -8,7 +8,7 @@
     "moduleResolution": "node",
     "target": "es5",
     "module": "commonjs",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "sourceMap": true,

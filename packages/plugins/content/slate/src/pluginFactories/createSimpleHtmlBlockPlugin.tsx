@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
+import React from 'react';
 import { getAlignmentFromElement } from '../plugins/paragraphs';
 import type { SlateComponentPluginDefinition } from '../types/slatePluginDefinitions';
 import createComponentPlugin from './createComponentPlugin';
@@ -19,7 +20,7 @@ type Def<T extends Record<string, unknown>> = Pick<
   | 'getStyle'
 > & {
   replaceWithDefaultOnRemove?: boolean;
-  tagName: keyof JSX.IntrinsicElements;
+  tagName: keyof React.JSX.IntrinsicElements;
   getData?: (el: HTMLElement) => T | void;
   noButton?: boolean;
 };
@@ -45,7 +46,7 @@ function createSimpleHtmlBlockPlugin<T = {}>(def: Def<HtmlBlockData<T>>) {
     controls: def.controls,
     addHoverButton: false,
     deserialize: {
-      tagName: def.tagName,
+      tagName: def.tagName as string,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       getData: def.getData || (getAlignmentFromElement as any),
     },
@@ -54,7 +55,7 @@ function createSimpleHtmlBlockPlugin<T = {}>(def: Def<HtmlBlockData<T>>) {
       ...(def.getStyle?.(data) ?? {}),
     }),
 
-    Component: def.tagName,
+    Component: def.tagName as string as any,
   });
 }
 

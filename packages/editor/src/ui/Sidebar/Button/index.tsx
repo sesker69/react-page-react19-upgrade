@@ -15,7 +15,7 @@ const DisplayModeToggle = ({
   ...rest
 }: {
   description: string;
-  icon: JSX.Element;
+  icon: React.ReactElement;
   active?: boolean;
   disabled?: boolean;
   activeColor?: PropTypes.Color;
@@ -33,7 +33,7 @@ const DisplayModeToggle = ({
           disabled={disabled}
           {...rest}
         >
-          {icon}
+          {icon as any}
         </Fab>
       </div>
       <div className="react-page-controls-mode-toggle-button-description">

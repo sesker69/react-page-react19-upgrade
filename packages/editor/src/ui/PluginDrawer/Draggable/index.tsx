@@ -38,7 +38,7 @@ const Draggable: FC<
   );
 
   return (
-    <div className={classes} ref={dragRef}>
+    <div className={classes} ref={dragRef as unknown as React.Ref<HTMLDivElement>}>
       <DragPreviewImage connect={preview} src={dragIcon} />
       {children}
     </div>

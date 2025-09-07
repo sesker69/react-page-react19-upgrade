@@ -48,7 +48,7 @@ const SpacerResizable: React.FC<CellPluginComponentProps<SpacerState>> = (
         </div>
       </div>
     </Resizable>
-  );
+  ) as React.ReactElement;
 };
 
 export default SpacerResizable;

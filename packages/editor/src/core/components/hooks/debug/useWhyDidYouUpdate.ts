@@ -4,7 +4,7 @@ export default function useWhyDidYouUpdate(name: string, props: any) {
   // Get a mutable ref object where we can store props ...
   // ... for comparison next time this hook runs.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const previousProps = useRef<any>();
+  const previousProps = useRef<any>(null);
 
   useEffect(() => {
     if (previousProps.current) {

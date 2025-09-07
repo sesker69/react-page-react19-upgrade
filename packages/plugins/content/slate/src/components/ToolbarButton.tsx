@@ -6,7 +6,7 @@ const IconButton = lazyLoad(() => import('@mui/material/IconButton'));
 const Tooltip = lazyLoad(() => import('@mui/material/Tooltip'));
 
 const ToolbarButton: React.FC<{
-  icon: JSX.Element | string;
+  icon: React.ReactElement | string;
   isActive: boolean;
   disabled?: boolean;
   onClick: React.MouseEventHandler;

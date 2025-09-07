@@ -19,12 +19,12 @@ function isElementInViewport(el: HTMLDivElement) {
   );
 }
 
-export const useKeepScrollPosition = (ref: RefObject<HTMLDivElement>) => {
+export const useKeepScrollPosition = (ref: RefObject<HTMLDivElement | null>) => {
   const mode = useDisplayMode();
   const firstElementInViewPortref = React.useRef<{
     el: HTMLDivElement;
     topOffset: number;
-  }>();
+  } | null>(null);
   useEffect(() => {
     const onScroll = throttle(() => {
       if (ref.current) {
@@ -38,7 +38,7 @@ export const useKeepScrollPosition = (ref: RefObject<HTMLDivElement>) => {
             topOffset: firstInViewport.getBoundingClientRect().top,
           };
         } else {
-          firstElementInViewPortref.current = undefined;
+          firstElementInViewPortref.current = null;
         }
       }
     }, 600);

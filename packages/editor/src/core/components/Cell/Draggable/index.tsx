@@ -34,7 +34,7 @@ const Draggable: FC<PropsWithChildren<Props>> = ({
     <>
       {previewElement}
       <div
-        ref={isLayoutMode ? dragRef : undefined}
+        ref={isLayoutMode ? (dragRef as unknown as React.Ref<HTMLDivElement>) : undefined}
         style={{
           height: '100%',
         }}
@@ -61,7 +61,7 @@ const Draggable: FC<PropsWithChildren<Props>> = ({
             })}
           ></div>
         ) : allowMoveInEditMode ? (
-          <div ref={dragRef}>
+          <div ref={dragRef as unknown as React.Ref<HTMLDivElement>}>
             <ResizeHandle onClick={focus} />
           </div>
         ) : null}

@@ -13,8 +13,8 @@ type OptionalFields =
   | 'onValidate'
   | 'validate'
   | 'autosave';
-type Props = Omit<AutoFormProps<unknown>, OptionalFields> &
-  Partial<AutoFormProps<unknown>>;
+type Props = Omit<AutoFormProps<Record<string, unknown>>, OptionalFields> &
+  Partial<AutoFormProps<Record<string, unknown>>>;
 
 export default forwardRef<any, PropsWithChildren<Props>>(
   (props: Props, ref) => (

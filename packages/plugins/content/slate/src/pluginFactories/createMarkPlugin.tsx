@@ -4,8 +4,8 @@ import createComponentPlugin from './createComponentPlugin';
 
 type MarkPluginDefinition = {
   type: string;
-  tagName: keyof JSX.IntrinsicElements;
-  icon?: JSX.Element;
+  tagName: keyof React.JSX.IntrinsicElements;
+  icon?: React.ReactElement;
   hotKey?: string;
   label?: string;
 };
@@ -20,7 +20,7 @@ export default (markDef: MarkPluginDefinition) => {
     addToolbarButton: false,
     addHoverButton: true,
     deserialize: {
-      tagName: markDef.tagName,
+      tagName: markDef.tagName as string,
     },
     Component: ({ children, attributes }) => {
       const Tag =

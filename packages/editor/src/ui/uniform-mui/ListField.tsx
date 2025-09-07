@@ -34,7 +34,7 @@ function List({
   return (
     <>
       <ListMaterial
-        ref={drop}
+        ref={drop as unknown as React.Ref<HTMLUListElement>}
         dense
         subheader={
           label ? (
@@ -48,7 +48,7 @@ function List({
             isValidElement(child)
               ? cloneElement(child, {
                   key: `${itemIndex}-${childIndex}`,
-                  name: child.props.name?.replace('$', '' + itemIndex),
+                  name: (child.props as any).name?.replace('$', '' + itemIndex),
                   ...itemProps,
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 } as any)

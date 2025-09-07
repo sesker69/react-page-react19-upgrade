@@ -4,7 +4,7 @@ import ListItem from '@mui/material/ListItem';
 import ListSubheader from '@mui/material/ListSubheader';
 import TextField from '@mui/material/TextField';
 import React from 'react';
-import { Portal } from 'react-portal';
+import { createPortal } from 'react-dom';
 import {
   useIsInsertMode,
   useUiTranslator,
@@ -65,7 +65,7 @@ export const PluginDrawer: React.FC = React.memo(() => {
     [setSearchText]
   );
   const isInsertMode = useIsInsertMode();
-  const inputRef = React.useRef<HTMLInputElement>();
+  const inputRef = React.useRef<HTMLInputElement>(null);
   React.useEffect(() => {
     let handle: NodeJS.Timeout;
     if (inputRef.current && isInsertMode) {
@@ -84,9 +84,8 @@ export const PluginDrawer: React.FC = React.memo(() => {
 
   const filteredPlugins = plugins.filter(searchFilter);
 
-  return (
-    <Portal>
-      <Drawer
+  return createPortal(
+    <Drawer
         variant="persistent"
         className="react-page-plugin-drawer"
         open={isInsertMode}
@@ -131,7 +130,7 @@ export const PluginDrawer: React.FC = React.memo(() => {
             })}
           </List>
         )}
-      </Drawer>
-    </Portal>
+      </Drawer>,
+    document.body
   );
 });

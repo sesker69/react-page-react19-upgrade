@@ -42,6 +42,13 @@ function Bool(props: BoolFieldProps) {
   const SelectionControl =
     appearance === 'checkbox' || appearance === undefined ? Checkbox : Switch;
 
+  const filteredProps = omit(filterDOMProps(props), ['helperText', 'fullWidth', 'slotProps', 'size']);
+  // Add size back only if it's not 'large' and component supports it
+  const componentSize = props.size && props.size !== 'large' ? props.size : undefined;
+  if (componentSize && (appearance === 'checkbox' || appearance === undefined)) {
+    (filteredProps as any).size = componentSize;
+  }
+
   return wrapField(
     { fullWidth: true, ...props },
     legend && (
@@ -63,7 +70,7 @@ function Bool(props: BoolFieldProps) {
             }
             ref={inputRef as Ref<HTMLButtonElement>}
             value={name}
-            {...omit(filterDOMProps(props), ['helperText', 'fullWidth'])}
+            {...filteredProps}
           />
         }
         label={transform ? transform(label as string) : label}

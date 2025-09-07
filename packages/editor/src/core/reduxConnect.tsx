@@ -1,24 +1,27 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import type { Dispatch } from 'react';
+import type { Dispatch, AnyAction } from 'redux';
+import type { ThunkDispatch } from 'redux-thunk';
 import React from 'react';
 import {
   createDispatchHook,
   createSelectorHook,
   createStoreHook,
   Provider,
+  TypedUseSelectorHook,
 } from 'react-redux';
-import type { RootState } from './types';
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+import type { RootState } from './types/state';
+
+// Create a properly typed context
 export const ReduxContext = React.createContext<any>(null);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// Provider component with proper typing
 export const ReduxProvider = ({ store, ...props }: any) => (
-  <Provider store={store} context={ReduxContext} {...props} />
+  <Provider store={store} context={ReduxContext as any} {...props} />
 );
 
-export const useStore = createStoreHook<RootState>(ReduxContext);
+// Create typed hooks
+export const useStore = createStoreHook<RootState>(ReduxContext as any);
 export const useDispatch = createDispatchHook(
-  ReduxContext
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-) as () => Dispatch<any>;
-export const useSelector = createSelectorHook<RootState>(ReduxContext);
+  ReduxContext as any
+) as () => ThunkDispatch<RootState, unknown, AnyAction>;
+export const useSelector: TypedUseSelectorHook<RootState> = createSelectorHook(ReduxContext as any);

@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type ImageLoaded = {
   file: File;
   dataUrl: string;
@@ -16,7 +18,7 @@ export type ImageUploadProps = {
   imageUpload: ImageUploadType;
   imageUploadError?: (errorCode: number) => void;
   imageUploaded: (resp: ImageUploaded) => void;
-  icon?: JSX.Element;
+  icon?: React.ReactElement;
   style?: React.CSSProperties;
   maxFileSize?: number;
   allowedExtensions?: string[];

@@ -9,7 +9,7 @@ export const Trash: React.FC = React.memo(() => {
   const [{ isHovering }, ref] = useTrashDrop();
   return (
     <div
-      ref={ref}
+      ref={ref as unknown as React.Ref<HTMLDivElement>}
       className={classNames('react-page-controls-trash', {
         'react-page-controls-trash-active': isLayoutMode,
       })}

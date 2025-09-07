@@ -2,7 +2,7 @@ import { lazyLoad } from '@react-page/editor';
 import React from 'react';
 import createComponentPlugin from '../../pluginFactories/createComponentPlugin';
 
-const LinkIcon = lazyLoad(() => import('@mui/icons-material/Link'));
+const LinkIcon = lazyLoad(() => import('@mui/icons-material/Link').then(module => ({ default: module.default })));
 
 type LinkData = {
   href: string;

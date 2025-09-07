@@ -22,16 +22,16 @@ const loadable = <T extends ComponentType<any>>(
 ) => {
   const Component = lazyWithPreload(factory);
 
-  const LoadableComponent = React.forwardRef(
-    (
-      {
-        fallback = null,
-        ...props
-      }: ComponentProps<T> & {
+  const LoadableComponent = React.forwardRef<any, ComponentProps<T> & {
         /**
          * render a fallback on server or if the component is not loaded
          */
         fallback?: ReactElement;
+      }>(
+    (
+      {
+        fallback = null,
+        ...props
       },
       ref
     ) => {

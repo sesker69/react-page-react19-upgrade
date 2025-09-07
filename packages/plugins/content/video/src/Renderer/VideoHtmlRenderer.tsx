@@ -1,5 +1,4 @@
 import React from 'react';
-import PlayArrow from '@mui/icons-material/PlayArrow';
 import { iconStyle } from '../common/styles';
 
 import { lazyLoad } from '@react-page/editor';
@@ -8,6 +7,7 @@ import type { VideoHtmlRendererProps } from '../types/renderer';
 
 // react player is big, better lazy load it.
 const ReactPlayer = lazyLoad(() => import('react-player'));
+const PlayArrow = lazyLoad(() => import('@mui/icons-material/PlayArrow').then(module => ({ default: module.default })));
 
 const Display: React.FC<VideoHtmlRendererProps> = ({ data, readOnly }) =>
   data?.src ? (

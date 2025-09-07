@@ -1,4 +1,5 @@
 import React from 'react';
+import '../polyfills/react-dom-polyfill';
 import '../styles/styles.css';
 import '@react-page/editor/lib/index.css';
 import type { EmotionCache } from '@emotion/react';

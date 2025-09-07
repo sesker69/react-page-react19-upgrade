@@ -15,11 +15,11 @@ export const AutoForm = lazyLoad(() => import('./AutoForm'));
 export const AutoField = lazyLoad(() => import('./AutoField'));
 export const AutoFields = lazyLoad(() => import('./AutoFields'));
 
-const getDefaultValue = function (bridge: JSONSchemaBridge): {
+const getDefaultValue = function (bridge: any): {
   [key: string]: unknown;
 } {
   return bridge.getSubfields().reduce(
-    (acc, fieldName) => ({
+    (acc: any, fieldName: string) => ({
       ...acc,
       [fieldName]: bridge.getInitialValue(fieldName),
     }),
@@ -49,8 +49,8 @@ export function AutoformControls<T extends DataTType>(props: Props<T>) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       model={data as any}
       autosave={true}
-      schema={bridge}
-      onSubmit={onChange}
+      schema={bridge as any}
+      onSubmit={(model: any) => onChange(model)}
     >
       {Content ? (
         <Content {...props} columnCount={columnCount} />
